@@ -9,8 +9,16 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var podcasts: [Podcast] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NetworkManager.shared.fetchPodcasts(withSearchKeywords: "nice try") { (podcasts) in
+            self.podcasts = podcasts
+            print(self.podcasts)
+        }
+        
         // Do any additional setup after loading the view.
     }
 

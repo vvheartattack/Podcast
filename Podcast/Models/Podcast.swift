@@ -16,6 +16,6 @@ struct Podcast: Decodable {
 }
 
 struct SearchResults: Decodable {
-    let resultCount: Int
-    let results: [Podcast]
+    var resultCount: Int
+    var results: [Podcast]
 }
