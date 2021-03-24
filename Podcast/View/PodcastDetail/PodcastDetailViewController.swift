@@ -24,17 +24,17 @@ class PodcastDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let podcastImageView = UIImageView()
-        podcastImageView.translatesAutoresizingMaskIntoConstraints = false
-        podcastImageView.contentMode = .scaleAspectFit
-        self.view.addSubview(podcastImageView)
-        NSLayoutConstraint.activate([
-            podcastImageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            podcastImageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            podcastImageView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            podcastImageView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-        ])
-        podcastImageView.kf.setImage(with: URL(string: podcast.artworkUrl600!))
+//        let podcastImageView = UIImageView()
+//        podcastImageView.translatesAutoresizingMaskIntoConstraints = false
+//        podcastImageView.contentMode = .scaleAspectFit
+//        self.view.addSubview(podcastImageView)
+//        NSLayoutConstraint.activate([
+//            podcastImageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+//            podcastImageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+//            podcastImageView.topAnchor.constraint(equalTo: self.view.topAnchor),
+//            podcastImageView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+//        ])
+//        podcastImageView.kf.setImage(with: URL(string: podcast.artworkUrl600!))
         let episodeImageView = UIImageView()
         episodeImageView.translatesAutoresizingMaskIntoConstraints = false
         episodeImageView.contentMode = .scaleAspectFit
@@ -42,12 +42,15 @@ class PodcastDetailViewController: UIViewController {
         NSLayoutConstraint.activate([
             episodeImageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             episodeImageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            episodeImageView.topAnchor.constraint(equalTo: podcastImageView.bottomAnchor),
+            episodeImageView.topAnchor.constraint(equalTo: self.view.bottomAnchor),
             episodeImageView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
         ])
         NetworkManager.shared.fetchEpisodes(feedURL: podcast.feedUrl!, completionHandler: { episodes in
             self.episodes = episodes
-            episodeImageView.kf.setImage(with: URL(string: episodes[0].imageUrl ?? ""))
+            DispatchQueue.main.async {
+                print(episodes.map{ $0.imageUrl }.filter{   $0 != nil})
+                episodeImageView.kf.setImage(with: URL(string: episodes[0].imageUrl!))
+            }
         })
         
         

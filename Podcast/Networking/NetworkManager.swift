@@ -35,24 +35,19 @@ class NetworkManager {
     
     func fetchEpisodes(feedURL: String, completionHandler: @escaping ([Episode]) -> ()) {
         guard let url = URL(string: feedURL) else { return }
-        DispatchQueue.global(qos: .background).async {
-            
-            let parser = FeedParser(URL: url)
-            parser.parseAsync(result: { (result) in
-                switch result {
-                case .success(let feed):
-                    // Grab the parsed feed directly as an optional rss, atom or json feed object
-                    guard let feed = feed.rssFeed else { return }
+        let parser = FeedParser(URL: url)
+        parser.parseAsync(result: { (result) in
+            switch result {
+            case .success(let feed):
+                // Grab the parsed feed directly as an optional rss, atom or json feed object
+                guard let feed = feed.rssFeed else { return }
                     
-                    let episodes = feed.toEpisodes()
-                    completionHandler(episodes)
+                let episodes = feed.toEpisodes()
+                completionHandler(episodes)
                     
-                case .failure(let error):
-                    print(error)
+            case .failure(let error):
+                print(error)
                 }
             })
-            
-            
-        }
     }
 }
