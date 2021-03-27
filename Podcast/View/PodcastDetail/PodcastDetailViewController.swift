@@ -42,8 +42,8 @@ class PodcastDetailViewController: UIViewController {
         NSLayoutConstraint.activate([
             episodeImageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             episodeImageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            episodeImageView.topAnchor.constraint(equalTo: self.view.bottomAnchor),
-            episodeImageView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            episodeImageView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            episodeImageView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
         NetworkManager.shared.fetchEpisodes(feedURL: podcast.feedUrl!, completionHandler: { episodes in
             self.episodes = episodes

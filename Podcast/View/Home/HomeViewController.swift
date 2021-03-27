@@ -12,9 +12,17 @@ class HomeViewController: UIViewController {
     
     var tableView: UITableView!
     var podcasts: [Podcast] = []
+    var searchController: UISearchController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //set searchController
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+//        searchController.obscuresBackgroundDuringPresentation = false
+        self.navigationItem.searchController = searchController
+
         
         self.tableView = UITableView()
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -23,7 +31,7 @@ class HomeViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             tableView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
         self.tableView.dataSource = self
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "datacell")
@@ -71,5 +79,20 @@ extension HomeViewController: UITableViewDelegate {
         let podcastDetailVC = PodcastDetailViewController(podcast: podcasts[indexPath.row])
         podcastDetailVC.view.backgroundColor = .white
         self.navigationController?.pushViewController(podcastDetailVC, animated: true)
+    }
+}
+
+// MARK: - UISearchResultsUPdating
+extension HomeViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text,
+           searchText != "" {
+            let searchResults = podcasts.filter({ (podcasts) -> Bool in
+                podcasts.trackName!.localizedCaseInsensitiveContains(searchText)
+        
+            })
+        } else {
+        }
+            
     }
 }
