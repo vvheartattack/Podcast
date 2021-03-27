@@ -20,7 +20,7 @@ class HomeViewController: UIViewController {
         //set searchController
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
-//        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
         self.navigationItem.searchController = searchController
 
         
@@ -37,11 +37,7 @@ class HomeViewController: UIViewController {
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "datacell")
         self.tableView.delegate = self
         
-        NetworkManager.shared.fetchPodcasts(withSearchKeywords: "郭德纲") { (podcasts) in
-            self.podcasts = podcasts
-            self.tableView.reloadData()
-        }
-        
+        self.updateSearchResults(for: searchController)
 
         // Do any additional setup after loading the view.
     }
@@ -85,14 +81,14 @@ extension HomeViewController: UITableViewDelegate {
 // MARK: - UISearchResultsUPdating
 extension HomeViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        if let searchText = searchController.searchBar.text,
-           searchText != "" {
-            let searchResults = podcasts.filter({ (podcasts) -> Bool in
-                podcasts.trackName!.localizedCaseInsensitiveContains(searchText)
-        
-            })
+        if let searchText = searchController.searchBar.text {
+            NetworkManager.shared.fetchPodcasts(withSearchKeywords: searchText) { (podcasts) in
+                self.podcasts = podcasts
+                self.tableView.reloadData()
+            }
         } else {
+            self.podcasts = []
+            self.tableView.reloadData()
         }
-            
     }
 }
