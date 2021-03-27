@@ -7,12 +7,14 @@
 
 import UIKit
 import Kingfisher
+import Alamofire
 
 class HomeViewController: UIViewController {
     
     var tableView: UITableView!
     var podcasts: [Podcast] = []
     var searchController: UISearchController!
+    var searchRequest: DataRequest?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,8 +83,10 @@ extension HomeViewController: UITableViewDelegate {
 // MARK: - UISearchResultsUPdating
 extension HomeViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
+        searchRequest?.cancel()
+        searchRequest = nil
         if let searchText = searchController.searchBar.text {
-            NetworkManager.shared.fetchPodcasts(withSearchKeywords: searchText) { (podcasts) in
+            searchRequest = NetworkManager.shared.fetchPodcasts(withSearchKeywords: searchText) { (podcasts) in
                 self.podcasts = podcasts
                 self.tableView.reloadData()
             }

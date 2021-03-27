@@ -13,9 +13,9 @@ class NetworkManager {
     /// 这是一个 NetworkManager 类的单例对象。
     static let shared = NetworkManager()
     
-    func fetchPodcasts(withSearchKeywords keywords: String, completionHandler: @escaping ([Podcast]) -> ()) {
+    func fetchPodcasts(withSearchKeywords keywords: String, completionHandler: @escaping ([Podcast]) -> ()) -> DataRequest {
         let parameters = ["term": keywords, "media": "podcast"]
-        AF.request("https://itunes.apple.com/search", method: .get, parameters: parameters)
+        return AF.request("https://itunes.apple.com/search", method: .get, parameters: parameters)
             .response { (response) in
                 guard response.error == nil  else {
                     print("iTunes podcast request failed", response.error!)
