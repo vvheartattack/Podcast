@@ -24,6 +24,8 @@ class PodcastDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .never
         
         let podcastImageView = UIImageView()
         let podcastTitleLabel = UILabel()
@@ -31,7 +33,6 @@ class PodcastDetailViewController: UIViewController {
 //        var episodeImageView = UIImageView()
         let OuterStackView = UIStackView()
         let podcastStackView = UIStackView()
-//        let podcastImageStackView = UIStackView()
         let podcastLabelsStackView = UIStackView()
         let episodeStackView = UIStackView()
         let detailViewScrollView = UIScrollView()
@@ -48,9 +49,12 @@ class PodcastDetailViewController: UIViewController {
         
         // Set up podcastTitleLabel
         podcastTitleLabel.text = podcast.trackName
+        podcastTitleLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         
         //Set up podcastDescriptionLabel
         podcastDescriptionLabel.text = podcast.artistName
+        podcastDescriptionLabel.textColor = UIColor.gray
+        podcastDescriptionLabel.font = UIFont.preferredFont(forTextStyle: .callout)
         
         // Set up OuterStackView
         OuterStackView.addArrangedSubview(podcastStackView)
@@ -70,6 +74,7 @@ class PodcastDetailViewController: UIViewController {
         podcastStackView.addArrangedSubview(podcastLabelsStackView)
         podcastStackView.axis = .horizontal
         podcastStackView.alignment = .top
+        podcastStackView.spacing = 16
         
         
         // Set up episodeStackView
@@ -85,7 +90,7 @@ class PodcastDetailViewController: UIViewController {
         NSLayoutConstraint.activate([
             OuterStackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
             OuterStackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
-            OuterStackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            OuterStackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 16),
             OuterStackView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -16)
         ])
         
