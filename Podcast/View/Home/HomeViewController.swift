@@ -19,6 +19,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         //set searchController
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -36,7 +37,7 @@ class HomeViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
         self.tableView.dataSource = self
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "datacell")
+        self.tableView.register(SearchViewTableViewCell.self, forCellReuseIdentifier: "datacell")
         self.tableView.delegate = self
         
         self.updateSearchResults(for: searchController)
@@ -59,13 +60,20 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "datacell"
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,for: indexPath) as! SearchViewTableViewCell
         let podcast = podcasts[indexPath.row]
-        cell.textLabel?.text = podcast.trackName
-        cell.imageView?.image = UIImage(systemName: "tortoise")
-        cell.imageView?.kf.setImage(with: URL(string: podcast.artworkUrl600!)) { result in
+        cell.cellIamgeView.kf.setImage(with: URL(string: podcast.artworkUrl600!)) { result in
             cell.setNeedsLayout()
         }
+        cell.titleLabel.text = podcast.trackName
+        cell.descriptionLabel.text = podcast.artistName
+//        cell.textLabel?.text = podcast.trackName
+//        cell.imageView?.image = UIImage(systemName: "tortoise")
+//        cell.imageView?.kf.setImage(with: URL(string: podcast.artworkUrl600!)) { result in
+//            cell.setNeedsLayout()
+//        }
+        cell.titleLabel.sizeToFit()
+        cell.descriptionLabel.sizeToFit()
         return cell
     }
 }

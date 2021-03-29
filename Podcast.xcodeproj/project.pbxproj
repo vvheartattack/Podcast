@@ -23,6 +23,7 @@
 		093531002606470D00DAE739 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093530FF2606470D00DAE739 /* HomeViewController.swift */; };
 		0935310926070E1F00DAE739 /* PodcastDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935310826070E1F00DAE739 /* PodcastDetailViewController.swift */; };
 		0935310E26087C5000DAE739 /* RSSFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935310D26087C5000DAE739 /* RSSFeed.swift */; };
+		0948E0D126106B6C00BAC00E /* SearchViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0948E0D026106B6B00BAC00E /* SearchViewTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		093530FF2606470D00DAE739 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		0935310826070E1F00DAE739 /* PodcastDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastDetailViewController.swift; sourceTree = "<group>"; };
 		0935310D26087C5000DAE739 /* RSSFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSFeed.swift; sourceTree = "<group>"; };
+		0948E0D026106B6B00BAC00E /* SearchViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewTableViewCell.swift; sourceTree = "<group>"; };
 		1E1BAE6BF9C95D483DB72436 /* Pods-Podcast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Podcast.debug.xcconfig"; path = "Target Support Files/Pods-Podcast/Pods-Podcast.debug.xcconfig"; sourceTree = "<group>"; };
 		9F41E56F7B2C230AFCAA9834 /* Pods_Podcast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Podcast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1067988AC9983CDECFBE7CD /* Pods-Podcast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Podcast.release.xcconfig"; path = "Target Support Files/Pods-Podcast/Pods-Podcast.release.xcconfig"; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			children = (
 				093530F12606426400DAE739 /* Home.storyboard */,
 				093530FF2606470D00DAE739 /* HomeViewController.swift */,
+				0948E0D026106B6B00BAC00E /* SearchViewTableViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0948E0D126106B6C00BAC00E /* SearchViewTableViewCell.swift in Sources */,
 				093530BA25FF444900DAE739 /* NetworkManager.swift in Sources */,
 				0935310926070E1F00DAE739 /* PodcastDetailViewController.swift in Sources */,
 				0935307825E7482200DAE739 /* ViewController.swift in Sources */,
