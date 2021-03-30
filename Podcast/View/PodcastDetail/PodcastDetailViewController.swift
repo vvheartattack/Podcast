@@ -22,6 +22,44 @@ class PodcastDetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func viewForPerEpisode(episode: Episode) -> UIView {
+        let view = UIView()
+        let outerStackView = UIStackView()
+        let labelStackView = UIStackView()
+        let episodeTitleLabel = UILabel()
+        let episodeDescriptionLabel = UILabel()
+        let episodeImageView: UIImageView? = UIImageView()
+//        let episodeDateLabel = UILabel()
+        
+        episodeTitleLabel.text = episode.title
+        episodeDescriptionLabel.text = episode.description
+//        episodeDateLabel.text = String(episode.pubDate)
+        episodeImageView?.kf.setImage(with: URL(string: episode.imageUrl!))
+        episodeImageView?.layer.cornerRadius = 20
+        episodeImageView?.clipsToBounds = true
+        
+        
+        // Set Up labelStackView
+        labelStackView.addArrangedSubview(episodeTitleLabel)
+        labelStackView.addArrangedSubview(episodeDescriptionLabel)
+        labelStackView.axis = .vertical
+        
+        // Set up outerStackView
+        if episodeImageView != nil {
+            NSLayoutConstraint.activate([
+                episodeImageView!.widthAnchor.constraint(equalToConstant: 60),
+                episodeImageView!.heightAnchor.constraint(equalToConstant: 60),
+            ])
+            outerStackView.addArrangedSubview(episodeImageView!)
+            
+        }
+        outerStackView.addArrangedSubview(labelStackView)
+        outerStackView.axis = .horizontal
+        outerStackView.spacing = 16
+        
+        return view
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -78,6 +116,17 @@ class PodcastDetailViewController: UIViewController {
         
         
         // Set up episodeStackView
+        NetworkManager.shared.fetchEpisodes(feedURL: podcast.feedUrl!, completionHandler: { episodes in
+            self.episodes = episodes
+//            DispatchQueue.main.async {
+//                print(episodes.map{ $0.imageUrl }.filter{   $0 != nil})
+//                detailStackView.kf.setImage(with: URL(string: episodes[0].imageUrl!))
+//            }
+        })
+        for i in episodes {
+            episodeStackView.addArrangedSubview(viewForPerEpisode(episode: i))
+        }
+        episodeStackView.axis = .vertical
         
         // Set up detailViewScrollView
         detailViewScrollView.addSubview(OuterStackView)
@@ -96,13 +145,7 @@ class PodcastDetailViewController: UIViewController {
         
         
         
-//        NetworkManager.shared.fetchEpisodes(feedURL: podcast.feedUrl!, completionHandler: { episodes in
-//            self.episodes = episodes
-//            DispatchQueue.main.async {
-//                print(episodes.map{ $0.imageUrl }.filter{   $0 != nil})
-//                detailStackView.kf.setImage(with: URL(string: episodes[0].imageUrl!))
-//            }
-//        })
+        
         
         
         
@@ -121,16 +164,5 @@ class PodcastDetailViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
