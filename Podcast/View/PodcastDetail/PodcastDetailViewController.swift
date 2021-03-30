@@ -57,6 +57,7 @@ class PodcastDetailViewController: UIViewController {
         outerStackView.axis = .horizontal
         outerStackView.spacing = 16
         
+        view.addSubview(outerStackView)
         return view
     }
     
