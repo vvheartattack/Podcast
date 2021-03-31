@@ -18,7 +18,7 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+//        self.view.backgroundColor = UIColor(red: 239, green: 239, blue: 239, alpha: 1)
         
         //set searchController
         searchController = UISearchController(searchResultsController: nil)
@@ -28,6 +28,7 @@ class HomeViewController: UIViewController {
 
         
         self.tableView = UITableView()
+//        self.tableView.backgroundColor = UIColor(red: 239, green: 239, blue: 239, alpha: 1)
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(tableView)
         NSLayoutConstraint.activate([

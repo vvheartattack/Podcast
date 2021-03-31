@@ -28,16 +28,18 @@ class PodcastDetailViewController: UIViewController {
         let labelStackView = UIStackView()
         let episodeTitleLabel = UILabel()
         let episodeDescriptionLabel = UILabel()
-        let episodeImageView: UIImageView? = UIImageView()
+        let episodeImageView = UIImageView()
 //        let episodeDateLabel = UILabel()
         
+        // Set Up font of labels
+        episodeDescriptionLabel.textColor = UIColor.gray
+        episodeDescriptionLabel.font = .systemFont(ofSize: 17)
         episodeTitleLabel.text = episode.title
+        episodeTitleLabel.font = .systemFont(ofSize: 17, weight: .medium)
+        
         episodeDescriptionLabel.text = episode.description
 //        episodeDateLabel.text = String(episode.pubDate)
-        episodeImageView?.kf.setImage(with: URL(string: episode.imageUrl!))
-        episodeImageView?.layer.cornerRadius = 20
-        episodeImageView?.clipsToBounds = true
-        
+        episodeImageView.kf.setImage(with: URL(string: episode.imageUrl!))
         
         // Set Up labelStackView
         labelStackView.addArrangedSubview(episodeTitleLabel)
@@ -45,36 +47,48 @@ class PodcastDetailViewController: UIViewController {
         labelStackView.axis = .vertical
         
         // Set up outerStackView
-        if episodeImageView != nil {
-            NSLayoutConstraint.activate([
-                episodeImageView!.widthAnchor.constraint(equalToConstant: 60),
-                episodeImageView!.heightAnchor.constraint(equalToConstant: 60),
-            ])
-            outerStackView.addArrangedSubview(episodeImageView!)
-            
-        }
-        outerStackView.addArrangedSubview(labelStackView)
+        episodeImageView.layer.cornerRadius = 10
+        episodeImageView.clipsToBounds = true
+        episodeImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            episodeImageView.widthAnchor.constraint(equalToConstant: 60),
+            episodeImageView.heightAnchor.constraint(equalToConstant: 60),
+        ])
+        outerStackView.addArrangedSubview(episodeImageView)
         outerStackView.axis = .horizontal
+        outerStackView.alignment = .top
+        outerStackView.distribution = .fill
+        outerStackView.addArrangedSubview(labelStackView)
+        
         outerStackView.spacing = 16
         
         view.addSubview(outerStackView)
+        outerStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            outerStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            outerStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            outerStackView.topAnchor.constraint(equalTo: view.topAnchor),
+            outerStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        
         return view
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .never
+//        self.view.backgroundColor = UIColor(red: 239, green: 239, blue: 239, alpha: 1)
+        
         
         let podcastImageView = UIImageView()
         let podcastTitleLabel = UILabel()
         let podcastDescriptionLabel = UILabel()
-//        var episodeImageView = UIImageView()
-        let OuterStackView = UIStackView()
+        let outerStackView = UIStackView()
         let podcastStackView = UIStackView()
         let podcastLabelsStackView = UIStackView()
         let episodeStackView = UIStackView()
         let detailViewScrollView = UIScrollView()
+        
 
         // Set up podcastImageView
         podcastImageView.kf.setImage(with: URL(string: podcast.artworkUrl600!))
@@ -96,9 +110,10 @@ class PodcastDetailViewController: UIViewController {
         podcastDescriptionLabel.font = UIFont.preferredFont(forTextStyle: .callout)
         
         // Set up OuterStackView
-        OuterStackView.addArrangedSubview(podcastStackView)
-        OuterStackView.addArrangedSubview(episodeStackView)
-        OuterStackView.axis = .vertical
+        outerStackView.addArrangedSubview(podcastStackView)
+        outerStackView.addArrangedSubview(episodeStackView)
+        outerStackView.axis = .vertical
+        outerStackView.spacing = 16
         
         // Set up podcastLabelsStackView
         podcastLabelsStackView.addArrangedSubview(podcastTitleLabel)
@@ -119,31 +134,39 @@ class PodcastDetailViewController: UIViewController {
         // Set up episodeStackView
         NetworkManager.shared.fetchEpisodes(feedURL: podcast.feedUrl!, completionHandler: { episodes in
             self.episodes = episodes
-//            DispatchQueue.main.async {
-//                print(episodes.map{ $0.imageUrl }.filter{   $0 != nil})
-//                detailStackView.kf.setImage(with: URL(string: episodes[0].imageUrl!))
-//            }
+            DispatchQueue.main.async {
+                for i in episodes {
+                    episodeStackView.addArrangedSubview(self.viewForPerEpisode(episode: i))
+                }
+            }
         })
-        for i in episodes {
-            episodeStackView.addArrangedSubview(viewForPerEpisode(episode: i))
-        }
+        
         episodeStackView.axis = .vertical
+        episodeStackView.spacing = 16
         
         // Set up detailViewScrollView
-        detailViewScrollView.addSubview(OuterStackView)
+        detailViewScrollView.addSubview(outerStackView)
         
         
 //        OuterStackView.distribution = .fillEqually
-        OuterStackView.translatesAutoresizingMaskIntoConstraints = false
+        outerStackView.translatesAutoresizingMaskIntoConstraints = false
 //        OuterStackView.contentMode = .scaleAspectFit
-        self.view.addSubview(OuterStackView)
+        self.view.addSubview(outerStackView)
         NSLayoutConstraint.activate([
-            OuterStackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
-            OuterStackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
-            OuterStackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            OuterStackView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -16)
+            outerStackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
+            outerStackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
+            outerStackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            outerStackView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -16)
         ])
-        
+        detailViewScrollView.addSubview(outerStackView)
+        detailViewScrollView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            detailViewScrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            detailViewScrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            detailViewScrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            detailViewScrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ])
+        self.view.addSubview(detailViewScrollView)
         
         
         
