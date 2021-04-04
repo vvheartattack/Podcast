@@ -68,11 +68,6 @@ extension HomeViewController: UITableViewDataSource {
         }
         cell.titleLabel.text = podcast.trackName
         cell.descriptionLabel.text = podcast.artistName
-//        cell.textLabel?.text = podcast.trackName
-//        cell.imageView?.image = UIImage(systemName: "tortoise")
-//        cell.imageView?.kf.setImage(with: URL(string: podcast.artworkUrl600!)) { result in
-//            cell.setNeedsLayout()
-//        }
         cell.titleLabel.sizeToFit()
         cell.descriptionLabel.sizeToFit()
         return cell
