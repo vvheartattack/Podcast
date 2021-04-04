@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0187C53794AAFC5DFD4142FB /* Pods_Podcast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F41E56F7B2C230AFCAA9834 /* Pods_Podcast.framework */; };
+		0933B2E92619981E00C8C941 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0933B2E82619981E00C8C941 /* PlayerViewController.swift */; };
 		0935307425E7482200DAE739 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935307325E7482200DAE739 /* AppDelegate.swift */; };
 		0935307625E7482200DAE739 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935307525E7482200DAE739 /* SceneDelegate.swift */; };
 		0935307825E7482200DAE739 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935307725E7482200DAE739 /* ViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0933B2E82619981E00C8C941 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		0935307025E7482200DAE739 /* Podcast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Podcast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0935307325E7482200DAE739 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0935307525E7482200DAE739 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +66,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0933B2E7261997D800C8C941 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				0933B2E82619981E00C8C941 /* PlayerViewController.swift */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
 		0935306725E7482200DAE739 = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +129,7 @@
 		093530EA2606420E00DAE739 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0933B2E7261997D800C8C941 /* Player */,
 				0935310726070DD200DAE739 /* PodcastDetail */,
 				0935307925E7482200DAE739 /* Main.storyboard */,
 				093530F5260642A400DAE739 /* MyPage */,
@@ -302,6 +313,7 @@
 				0935310926070E1F00DAE739 /* PodcastDetailViewController.swift in Sources */,
 				0935307825E7482200DAE739 /* ViewController.swift in Sources */,
 				093530FD260646FF00DAE739 /* MyPageViewController.swift in Sources */,
+				0933B2E92619981E00C8C941 /* PlayerViewController.swift in Sources */,
 				093531002606470D00DAE739 /* HomeViewController.swift in Sources */,
 				093530C825FF4CF200DAE739 /* Podcast.swift in Sources */,
 				0935307425E7482200DAE739 /* AppDelegate.swift in Sources */,

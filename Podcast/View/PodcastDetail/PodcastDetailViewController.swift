@@ -179,9 +179,18 @@ class PodcastDetailViewController: UIViewController {
                 // We only display no more than 15 episodes
                 for (index, episode) in episodes.enumerated() where index < 15 {
                     episodeStackView.addArrangedSubview(self.viewForPerEpisode(episode: episode))
+                    let playerViewController: PlayerViewController = PlayerViewController(episode: episode)
+                    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap(tap:)))
+                    self.viewForPerEpisode(episode: episode).addGestureRecognizer(tapGesture)
+                    self.navigationController?.pushViewController(_: playerViewController, animated: true)
+                    
                 }
             }
         })
+    }
+    
+    @objc func tap(tap: UITapGestureRecognizer) {
+        
     }
 
 }
