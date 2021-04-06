@@ -40,49 +40,46 @@ class PlayerViewController: UIViewController {
         view = setLayout()
         self.view = view
         
-        let url = URL(string: episode.streamUrl)
-        
-        let playerItem = AVPlayerItem(url: url!)
-        self.playerItem = playerItem
-        
-        let podcastPlayer = AVPlayer(playerItem: playerItem)
-        self.podcastPlayer = podcastPlayer
-        
-        let duration = playerItem.asset.duration
-        let seconds = CMTimeGetSeconds(duration)
-        let secondsInt = Int(seconds)
-        
-        // Set playbackSlider
-        playbackSlider.minimumValue = 0
-        playbackSlider.maximumValue = Float(seconds)
-        playbackSlider.isContinuous = true
-        
-        // 小时：分钟：秒，确保每个单位有两位数字
-        overallTimeLabel.text = String(format: "%02d:%02d:%02d", secondsInt / 3600, secondsInt / 60 % 60, secondsInt % 60)
-        currentTimeLabel.text = String(format: "%02d:%02d:%02d", 0, 0, 0)
-        
-        // 播放器每播放 1 秒钟调用一次
-        podcastPlayer.addPeriodicTimeObserver(forInterval: .init(seconds: 1, preferredTimescale: 1), queue: .main) { (cmTime) in
-            if podcastPlayer.currentItem?.status == .readyToPlay {
-                let time = CMTimeGetSeconds(podcastPlayer.currentTime())
-                let timeInt = Int(time)
-                self.playbackSlider.value = Float(time)
-                self.currentTimeLabel.text = String(format: "%02d:%02d:%02d", timeInt / 3600, timeInt / 60 % 60, timeInt % 60)
+        DispatchQueue.main.async {
+            let url = URL(string: self.episode.streamUrl)
+            
+            let playerItem = AVPlayerItem(url: url!)
+            self.playerItem = playerItem
+            
+            let podcastPlayer = AVPlayer(playerItem: playerItem)
+            self.podcastPlayer = podcastPlayer
+            
+            let duration = playerItem.asset.duration
+            let seconds = CMTimeGetSeconds(duration)
+            let secondsInt = Int(seconds)
+            
+            // Set playbackSlider
+            self.playbackSlider.minimumValue = 0
+            self.playbackSlider.maximumValue = Float(seconds)
+            self.playbackSlider.isContinuous = true
+            
+            // 小时：分钟：秒，确保每个单位有两位数字
+            self.overallTimeLabel.text = String(format: "%02d:%02d:%02d", secondsInt / 3600, secondsInt / 60 % 60, secondsInt % 60)
+            self.currentTimeLabel.text = String(format: "%02d:%02d:%02d", 0, 0, 0)
+            
+            // 播放器每播放 1 秒钟调用一次
+            podcastPlayer.addPeriodicTimeObserver(forInterval: .init(seconds: 1, preferredTimescale: 1), queue: .main) { (cmTime) in
+                if podcastPlayer.currentItem?.status == .readyToPlay {
+                    let time = CMTimeGetSeconds(podcastPlayer.currentTime())
+                    let timeInt = Int(time)
+                    self.playbackSlider.value = Float(time)
+                    self.currentTimeLabel.text = String(format: "%02d:%02d:%02d", timeInt / 3600, timeInt / 60 % 60, timeInt % 60)
+                }
+                
+                let playbackLikelyToKeepUP = podcastPlayer.currentItem?.isPlaybackLikelyToKeepUp
+                if playbackLikelyToKeepUP == false {
+                    // 等待加载中
+                } else {
+                    // 可以正常播放
+                }
             }
             
-            let playbackLikelyToKeepUP = podcastPlayer.currentItem?.isPlaybackLikelyToKeepUp
-            if playbackLikelyToKeepUP == false {
-                // 等待加载中
-            } else {
-                // 可以正常播放
-            }
         }
-        
-        
-        
-        
-        
-
         // Do any additional setup after loading the view.
     }
     
@@ -99,10 +96,16 @@ class PlayerViewController: UIViewController {
     private func setLayout() -> UIView {
         
         let view = UIView()
-        
+        view.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.937254902, alpha: 1)
         
         // Set episodeImageView
         episodeImageView = UIImageView()
+        episodeImageView.layer.cornerRadius = 20
+        episodeImageView.clipsToBounds = true
+        episodeImageView.snp.makeConstraints { (make) in
+            make.width.height.equalTo(300)
+        }
+        episodeImageView.contentMode = .scaleAspectFit
         episodeImageView.kf.setImage(with: URL(string: episode.imageUrl!))
         
         // Set playbackSlider
@@ -126,19 +129,13 @@ class PlayerViewController: UIViewController {
         
         // Set slider stack
         let sliderStackView = UIStackView()
+        sliderStackView.axis = .horizontal
         sliderStackView.alignment = .center
         sliderStackView.distribution = .fill
         sliderStackView.spacing = 8
         sliderStackView.addArrangedSubview(currentTimeLabel)
         sliderStackView.addArrangedSubview(playbackSlider)
         sliderStackView.addArrangedSubview(overallTimeLabel)
-        view.addSubview(sliderStackView)
-        sliderStackView.snp.makeConstraints{ (make) -> Void in
-            make.centerX.equalTo(view)
-            make.centerY.equalTo(view)
-            make.leading.equalTo(view).offset(16)
-            make.trailing.equalTo(view).offset(-16)
-        }
         
         // Set play button
         playButton = UIButton(type: UIButton.ButtonType.custom)
@@ -189,22 +186,16 @@ class PlayerViewController: UIViewController {
         // Set control stack view
         let controlStackView  = UIStackView()
         controlStackView.alignment = .center
+        controlStackView.axis = .horizontal
         controlStackView.distribution = .equalCentering //分开分布
         controlStackView.addArrangedSubview(backwardButton)
         controlStackView.addArrangedSubview(playButton)
         controlStackView.addArrangedSubview(forwardButton)
-//        view.addSubview(controlStackView)
-        controlStackView.snp.makeConstraints{ (make) -> Void in
-            make.centerX.equalTo(sliderStackView)
-            make.top.equalTo(sliderStackView).offset(16)
-            make.leading.equalTo(view).offset(16)
-            make.trailing.equalTo(view).offset(-16)
-            
-        }
         
         // Set outer stack view
         let outerStackView = UIStackView()
-        outerStackView.alignment = .center
+        outerStackView.alignment = .fill
+        outerStackView.axis = .vertical
         outerStackView.distribution = .fill
         outerStackView.addArrangedSubview(episodeImageView)
         outerStackView.addArrangedSubview(sliderStackView)
@@ -212,11 +203,8 @@ class PlayerViewController: UIViewController {
         outerStackView.spacing = 16
         view.addSubview(outerStackView)
         outerStackView.snp.makeConstraints{ (make) in
-            make.centerX.equalTo(view)
-            make.centerY.equalTo(view)
-            make.leading.equalTo(view)
-            make.trailing.equalTo(view)
-            
+            make.centerX.centerY.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
         }
         
         return view
