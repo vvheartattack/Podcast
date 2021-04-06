@@ -79,7 +79,7 @@ extension HomeViewController: UITableViewDataSource {
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let podcastDetailVC = PodcastDetailViewController(podcast: podcasts[indexPath.row])
-        podcastDetailVC.view.backgroundColor = .white
+        podcastDetailVC.view.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.937254902, alpha: 1)
         self.navigationController?.pushViewController(podcastDetailVC, animated: true)
     }
 }
