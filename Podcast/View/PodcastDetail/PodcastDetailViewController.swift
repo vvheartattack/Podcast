@@ -13,6 +13,8 @@ class PodcastDetailViewController: UIViewController {
 
     var podcast: Podcast
     var episodes: [Episode] = []
+    var episodeViews: [UIView] = []
+    
     init(podcast: Podcast) {
         self.podcast = podcast
         super.init(nibName: nil, bundle: nil)
@@ -92,7 +94,7 @@ class PodcastDetailViewController: UIViewController {
         let detailViewScrollView = UIScrollView()
         
         
-        // Set up detailViewControllView
+        // Set up detailViewScrollView
         detailViewScrollView.translatesAutoresizingMaskIntoConstraints = false
         // If the content is not high enough, still make it scrollable.
         detailViewScrollView.alwaysBounceVertical = true
@@ -178,19 +180,23 @@ class PodcastDetailViewController: UIViewController {
                 // We can use `.enumerated()` to traverse with index and item in an array.
                 // We only display no more than 15 episodes
                 for (index, episode) in episodes.enumerated() where index < 15 {
-                    episodeStackView.addArrangedSubview(self.viewForPerEpisode(episode: episode))
-                    let playerViewController: PlayerViewController = PlayerViewController(episode: episode)
-                    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap(tap:)))
-                    self.viewForPerEpisode(episode: episode).addGestureRecognizer(tapGesture)
-                    self.navigationController?.pushViewController(_: playerViewController, animated: true)
+                    let episodeView = self.viewForPerEpisode(episode: episode)
+                    episodeStackView.addArrangedSubview(episodeView)
                     
+                    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.episodeTapped))
+                    episodeView.addGestureRecognizer(tapGesture)
+                    
+                    self.episodeViews.append(episodeView)
                 }
             }
         })
     }
     
-    @objc func tap(tap: UITapGestureRecognizer) {
-        
+    @objc func episodeTapped(sender: UITapGestureRecognizer) {
+        if let episodeView = sender.view, let index = episodeViews.firstIndex(of: episodeView) {
+            let playerViewController: PlayerViewController = PlayerViewController(episode: episodes[index])
+            self.navigationController?.pushViewController(_: playerViewController, animated: true)
+        }
     }
 
 }
