@@ -25,7 +25,7 @@ class MyPageViewController: UIViewController {
         avatarImageView = UIImageView()
         avatarImageView.image = UIImage.init(imageLiteralResourceName: "Avatar.JPG")
         avatarImageView.clipsToBounds = true
-        avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2
+        avatarImageView.layer.cornerRadius = 75
         avatarImageView.snp.makeConstraints { (make) in
             make.width.height.equalTo(150)
         }
