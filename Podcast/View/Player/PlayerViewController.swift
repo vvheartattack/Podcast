@@ -96,14 +96,20 @@ class PlayerViewController: UIViewController {
     private func setLayout() -> UIView {
         
         let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.937254902, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        let imageContainerView = UIView()
+        view.addSubview(imageContainerView)
         
         // Set episodeImageView
         episodeImageView = UIImageView()
-        episodeImageView.layer.cornerRadius = 20
+//        episodeImageView.layer.cornerRadius = 20
         episodeImageView.clipsToBounds = true
+        imageContainerView.addSubview(episodeImageView)
         episodeImageView.snp.makeConstraints { (make) in
-            make.width.height.equalTo(300)
+            make.centerX.centerY.equalToSuperview()
+            make.height.equalToSuperview()
+            make.height.equalTo(200)
+            make.width.equalTo(episodeImageView.snp.height)
         }
         episodeImageView.contentMode = .scaleAspectFit
         episodeImageView.kf.setImage(with: URL(string: episode.imageUrl!))
