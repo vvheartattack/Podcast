@@ -13,7 +13,7 @@ class MyPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        setMyPageLayout()
+//        setMyPageLayout()
         
         // Do any additional setup after loading the view.
     }
