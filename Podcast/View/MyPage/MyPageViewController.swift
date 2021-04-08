@@ -20,6 +20,13 @@ class MyPageViewController: UIViewController {
     
     private func setMyPageLayout() {
         let avatarImageView: UIImageView
+        let avatarLabel: UILabel
+        
+        //Set avatarLabel
+        avatarLabel = UILabel()
+        avatarLabel.text = "Mika"
+        avatarLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        avatarLabel.textColor = .black
         
         // Set avatarImageView
         avatarImageView = UIImageView()
@@ -32,6 +39,16 @@ class MyPageViewController: UIViewController {
         avatarImageView.contentMode = .scaleAspectFit
         
         let outerStackView: UIStackView
+        let avatarStackView: UIStackView
+        
+        // Set avatarStackView
+        avatarStackView = UIStackView()
+        avatarStackView.distribution = .fill
+        avatarStackView.alignment = .center
+        avatarStackView.axis = .vertical
+        avatarStackView.addArrangedSubview(avatarImageView)
+        avatarStackView.addArrangedSubview(avatarLabel)
+        avatarStackView.spacing = 8
         
         // Set outerStackView
         outerStackView = UIStackView()
@@ -45,7 +62,7 @@ class MyPageViewController: UIViewController {
             make.leading.equalTo(self.view)
             make.trailing.equalTo(self.view)
         }
-        outerStackView.addArrangedSubview(avatarImageView)
+        outerStackView.addArrangedSubview(avatarStackView)
         
     }
     
