@@ -14,10 +14,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NetworkManager.shared.fetchPodcasts(withSearchKeywords: "nice try") { (podcasts) in
-            self.podcasts = podcasts
-            print(self.podcasts)
-        }
         
         // Do any additional setup after loading the view.
     }
