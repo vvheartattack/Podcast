@@ -102,7 +102,7 @@ class PlayerViewController: UIViewController {
         
         // Set episodeImageView
         episodeImageView = UIImageView()
-//        episodeImageView.layer.cornerRadius = 20
+        episodeImageView.layer.cornerRadius = 35
         episodeImageView.clipsToBounds = true
         imageContainerView.addSubview(episodeImageView)
         episodeImageView.snp.makeConstraints { (make) in
