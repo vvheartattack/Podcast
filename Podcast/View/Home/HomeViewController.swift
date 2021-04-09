@@ -19,7 +19,9 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.view.backgroundColor = UIColor(red: 239, green: 239, blue: 239, alpha: 1)
-        
+//        let podcast1 = Podcast(trackName: "Nice Try!", artistName: "Curbed", artworkUrl600: "https://is2-ssl.mzstatic.com/image/thumb/Podcasts123/v4/7f/11/3a/7f113a39-c48c-7f0d-6e58-74d13e0a62d9/mza_7799809172540385207.png/600x600bb.jpg", trackCount: 10, feedUrl: "https://feeds.megaphone.fm/nicetry")
+//        let podcast2 = Podcast(trackName: "郭德纲相声十年经典", artistName: "德云社郭德纲相声VIP", artworkUrl600: "https://is4-ssl.mzstatic.com/image/thumb/Podcasts113/v4/88/22/ab/8822ab0a-448c-a8ae-66d3-f6d18f41268c/mza_4718731764701138855.jpg/600x600bb.jpg", trackCount: 905, feedUrl: "http://www.ximalaya.com/album/2667276.xml")
+//        self.podcasts = [podcast1, podcast2]
         //set searchController
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -89,13 +91,21 @@ extension HomeViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         searchRequest?.cancel()
         searchRequest = nil
-        if let searchText = searchController.searchBar.text {
-            searchRequest = NetworkManager.shared.fetchPodcasts(withSearchKeywords: searchText) { (podcasts) in
+        let searchText: String? = searchController.searchBar.text
+        
+        if searchText != "" {
+            searchRequest = NetworkManager.shared.fetchPodcasts(withSearchKeywords: searchText!) { (podcasts) in
                 self.podcasts = podcasts
                 self.tableView.reloadData()
             }
         } else {
-            self.podcasts = []
+
+            let podcast1 = Podcast(trackName: "Nice Try", artistName: "Nice Try Podcast", artworkUrl600: "https://is4-ssl.mzstatic.com/image/thumb/Podcasts124/v4/5a/c2/73/5ac2732b-39c1-7ca1-d8b4-f780aeaded23/mza_1074270643340895275.jpg/600x600bb.jpg", trackCount: 71, feedUrl: "https://nicetrypod.com/episodes/feed.xml")
+            let podcast2 = Podcast(trackName: "郭德纲于谦助眠相声集", artistName: "酸奶酒鬼", artworkUrl600: "https://is2-ssl.mzstatic.com/image/thumb/Podcasts123/v4/0c/71/97/0c71972e-d8e6-aa1b-e2ba-da5fed83e013/mza_1869713097538247862.jpg/600x600bb.jpg", trackCount: 11, feedUrl: "http://www.ximalaya.com/album/37742509.xml")
+            let podcast3 = Podcast(trackName: "日谈公园", artistName: "日谈公园", artworkUrl600: "https://is4-ssl.mzstatic.com/image/thumb/Podcasts124/v4/5e/b1/fd/5eb1fd90-509a-94ce-3e23-3f46c9e520da/mza_6791329813785612578.jpg/600x600bb.jpg", trackCount: 348, feedUrl: "http://www.ximalaya.com/album/5574153.xml")
+            let podcast4 = Podcast(trackName: "忽左忽右", artistName: "JustPod", artworkUrl600: "https://is2-ssl.mzstatic.com/image/thumb/Podcasts123/v4/d1/89/29/d189297e-7498-54bb-5fc9-919d1dd4e702/mza_3939122817325515104.png/600x600bb.jpg", trackCount: 154, feedUrl: "https://justpodmedia.com/rss/left-right.xml")
+            let podcast5 = Podcast(trackName: "不合时宜", artistName: "JustPod", artworkUrl600: "https://is5-ssl.mzstatic.com/image/thumb/Podcasts114/v4/12/9b/31/129b31cc-166a-1799-7085-9e1f0fe5c215/mza_4089001267238303775.png/600x600bb.jpg", trackCount: 73, feedUrl: "https://justpodmedia.com/rss/theweirdo.xml")
+            self.podcasts = [podcast1, podcast2, podcast3, podcast4, podcast5]
             self.tableView.reloadData()
         }
     }
