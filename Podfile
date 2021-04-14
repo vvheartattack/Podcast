@@ -10,4 +10,5 @@ target 'Podcast' do
   pod 'FeedKit', '~> 9.0'
   pod 'Kingfisher', '~> 6.0'
   pod 'SnapKit', '~> 5.0.0'
+  pod 'GRDB.swift'
 end
