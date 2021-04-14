@@ -9,6 +9,7 @@ import Foundation
 import FeedKit
 
 struct Episode {
+    var guid: RSSFeedItemGUID?
     var title: String
     var pubDate: Date
     var description: String
@@ -24,6 +25,7 @@ struct Episode {
         self.author = feedItem.iTunes?.iTunesAuthor ?? ""
         self.imageUrl = feedItem.iTunes?.iTunesImage?.attributes?.href
         self.streamUrl = feedItem.enclosure?.attributes?.url ?? ""
+        self.guid = feedItem.guid
     }
     
 }
