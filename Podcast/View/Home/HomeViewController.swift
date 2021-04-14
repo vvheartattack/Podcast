@@ -18,10 +18,7 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.view.backgroundColor = UIColor(red: 239, green: 239, blue: 239, alpha: 1)
-//        let podcast1 = Podcast(trackName: "Nice Try!", artistName: "Curbed", artworkUrl600: "https://is2-ssl.mzstatic.com/image/thumb/Podcasts123/v4/7f/11/3a/7f113a39-c48c-7f0d-6e58-74d13e0a62d9/mza_7799809172540385207.png/600x600bb.jpg", trackCount: 10, feedUrl: "https://feeds.megaphone.fm/nicetry")
-//        let podcast2 = Podcast(trackName: "郭德纲相声十年经典", artistName: "德云社郭德纲相声VIP", artworkUrl600: "https://is4-ssl.mzstatic.com/image/thumb/Podcasts113/v4/88/22/ab/8822ab0a-448c-a8ae-66d3-f6d18f41268c/mza_4718731764701138855.jpg/600x600bb.jpg", trackCount: 905, feedUrl: "http://www.ximalaya.com/album/2667276.xml")
-//        self.podcasts = [podcast1, podcast2]
+
         //set searchController
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
