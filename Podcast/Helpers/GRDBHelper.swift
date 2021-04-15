@@ -17,14 +17,17 @@ class GRDBHelper {
         let databasePath = documentPath.appendingPathComponent("db.sqlite")
         dbQueue = try! DatabaseQueue(path: databasePath)
         
+    }
+    
+    func createSubscribedPodcastTable() {
         do {
             try dbQueue.write { db in
                 try db.execute(sql: """
-                    CREATE TABLE IF NOT EXIST subscribed_podcast (
-                        trackId TEXT PRIMARY KEY NOT NULL,
+                    CREATE TABLE IF NOT EXISTS subscribed_podcast (
+                        trackId INTEGER PRIMARY KEY NOT NULL,
                         trackName TEXT,
                         artworkUrl TEXT,
-                        trackCount Int,
+                        trackCount INTEGER,
                         feedUrl TEXT
                         )
                     """)
@@ -32,7 +35,44 @@ class GRDBHelper {
         } catch {
             fatalError("\(error)")
         }
-        
     }
+    
+    func createDownloadedEpisodeTable() {
+        do {
+            try dbQueue.write { db in
+                try db.execute(sql: """
+                    CREATE TABLE IF NOT EXISTS downloaded_episode (
+                        guid TEXt PRIMARY KEY NOT NULL,
+                        title TEXT,
+                        description TEXT,
+                        author TEXT,
+                        imageUrl TEXT,
+                        downloadState TEXT
+                        )
+                    """)
+            }
+        } catch {
+            fatalError("\(error)")
+        }
+    }
+    
+    func insertIntoSubscribedPodcastTable() {
+        do {
+            try dbQueue.write { db in
+                try db.execute(sql: """
+                    INSERT INTO subscribed_podcast (trackId) VALUES (
+                        1487143507)
+                    """)
+            }
+        } catch {
+            fatalError("\(error)")
+        }
+    }
+    
+//    func fetchSubscribedPodcastTable() {
+//        let places = try dbQueue.read { db in
+//            try .fetchAll(db, sql: "SELECT * FROM subscribed_podcast")
+//        }
+//    }
     
 }
