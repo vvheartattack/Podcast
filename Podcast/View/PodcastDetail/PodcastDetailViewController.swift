@@ -94,6 +94,20 @@ class PodcastDetailViewController: UIViewController {
         let detailViewScrollView = UIScrollView()
         
         
+        // Set up subcribeButton
+        let subcribeButton = UIButton(type: .custom)
+//        subcribeButton.frame = CGRect(x: <#T##CGFloat#>, y: <#T##CGFloat#>, width: <#T##CGFloat#>, height: <#T##CGFloat#>)
+        subcribeButton.setTitle("订阅", for: .normal)
+        subcribeButton.setTitleColor(.white, for: .normal)
+        subcribeButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        subcribeButton.backgroundColor = #colorLiteral(red: 0, green: 0.4739482999, blue: 0.9821667075, alpha: 1)
+        subcribeButton.layer.cornerRadius = 5
+        subcribeButton.snp.makeConstraints { make in
+            make.width.equalTo(65)
+            make.height.equalTo(26)
+        }
+        subcribeButton.addTarget(self, action: #selector(subcribeButtonClicked(sender:)), for: .touchUpInside)
+        
         // Set up detailViewScrollView
         detailViewScrollView.translatesAutoresizingMaskIntoConstraints = false
         // If the content is not high enough, still make it scrollable.
@@ -129,9 +143,10 @@ class PodcastDetailViewController: UIViewController {
         // Set up podcastLabelsStackView
         podcastLabelsStackView.addArrangedSubview(podcastTitleLabel)
         podcastLabelsStackView.addArrangedSubview(podcastDescriptionLabel)
+        podcastLabelsStackView.addArrangedSubview(subcribeButton)
         podcastLabelsStackView.axis = .vertical
-        podcastLabelsStackView.distribution = .fill
-        podcastLabelsStackView.alignment = .fill
+        podcastLabelsStackView.distribution = .equalSpacing
+        podcastLabelsStackView.alignment = .leading
         
         // Set up podcastStackView
         podcastStackView.addArrangedSubview(podcastImageView)
@@ -196,6 +211,18 @@ class PodcastDetailViewController: UIViewController {
         if let episodeView = sender.view, let index = episodeViews.firstIndex(of: episodeView) {
             let playerViewController: PlayerViewController = PlayerViewController(episode: episodes[index])
             self.navigationController?.pushViewController(_: playerViewController, animated: true)
+        }
+    }
+    
+    @objc func subcribeButtonClicked(sender: UIButton) {
+        if(sender.titleLabel?.text == "订阅") {
+            sender.setTitle("已订阅", for: .normal)
+            sender.backgroundColor = .gray
+            GRDBHelper.shared.save(podcast)
+        } else {
+            sender.setTitle("订阅", for: .normal)
+            sender.backgroundColor = #colorLiteral(red: 0, green: 0.4739482999, blue: 0.9821667075, alpha: 1)
+            GRDBHelper.shared.deleteSubcribedPodcast(podcast)
         }
     }
 
