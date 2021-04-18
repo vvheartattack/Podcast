@@ -16,7 +16,7 @@ class GRDBHelper {
         let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as NSString
         let databasePath = documentPath.appendingPathComponent("db.sqlite")
         dbQueue = try! DatabaseQueue(path: databasePath)
-        
+        print("Database Path: \(databasePath)")
     }
     
     func createSubscribedPodcastTable() {
@@ -24,11 +24,12 @@ class GRDBHelper {
             try dbQueue.write { db in
                 try db.execute(sql: """
                     CREATE TABLE IF NOT EXISTS subscribed_podcast (
-                        trackId INTEGER PRIMARY KEY NOT NULL,
-                        trackName TEXT,
-                        artworkUrl TEXT,
-                        trackCount INTEGER,
-                        feedUrl TEXT
+                        track_id INTEGER PRIMARY KEY NOT NULL,
+                        track_name TEXT,
+                        artwork_url TEXT,
+                        track_count INTEGER,
+                        artist_name TEXT,
+                        feed_url TEXT
                         )
                     """)
             }
@@ -56,23 +57,36 @@ class GRDBHelper {
         }
     }
     
-    func insertIntoSubscribedPodcastTable() {
+    func save<T: PersistableRecord>(_ data: T) {
         do {
             try dbQueue.write { db in
-                try db.execute(sql: """
-                    INSERT INTO subscribed_podcast (trackId) VALUES (
-                        1487143507)
-                    """)
+                try data.save(db)
             }
         } catch {
-            fatalError("\(error)")
+            print(error)
         }
     }
     
-//    func fetchSubscribedPodcastTable() {
-//        let places = try dbQueue.read { db in
-//            try .fetchAll(db, sql: "SELECT * FROM subscribed_podcast")
-//        }
-//    }
+    func fetchAll<T: TableRecord & FetchableRecord>(_ type: T.Type) -> [T]? {
+        do {
+            return try dbQueue.read { db in
+                try type.fetchAll(db)
+            }
+        } catch {
+            print(error)
+            return nil
+        }
+    }
+    
+    func deleteSubcribedPodcast<T: PersistableRecord>(_ data: T) {
+        do {
+            try dbQueue.write { db in
+                try data.delete(db)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
     
 }
