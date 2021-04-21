@@ -3,6 +3,8 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,8 +20,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="xS5-E5-ubB" kind="relationship" relationship="viewControllers" id="2xD-Pl-yqA"/>
-                        <segue destination="heu-1F-e6D" kind="relationship" relationship="viewControllers" id="Px3-rF-GER"/>
                         <segue destination="ufl-2l-Zto" kind="relationship" relationship="viewControllers" id="y8F-J6-s6Z"/>
+                        <segue destination="fFw-Jd-haa" kind="relationship" relationship="viewControllers" id="fem-hK-2W4"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YYx-QO-msS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -34,7 +36,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uHG-CI-5WM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="870" y="-51"/>
+            <point key="canvasLocation" x="814" y="0.0"/>
         </scene>
         <!--MyPage-->
         <scene sceneID="Hdq-ea-C3R">
@@ -44,17 +46,28 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cgP-an-mwg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="879" y="105"/>
+            <point key="canvasLocation" x="824" y="70"/>
         </scene>
-        <!--SubcribedPodcasts-->
-        <scene sceneID="dvW-pK-iKA">
+        <!--Item-->
+        <scene sceneID="v5K-lq-LH0">
             <objects>
-                <viewControllerPlaceholder storyboardName="SubcribedPodcasts" id="heu-1F-e6D" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" id="lh9-6X-ipL"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dnG-hf-Xy8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController id="fFw-Jd-haa" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hou-eJ-aDv">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="7op-q2-gQe"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="JeG-o9-qQp"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UXh-5k-kHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="929" y="29"/>
+            <point key="canvasLocation" x="238" y="-644"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
