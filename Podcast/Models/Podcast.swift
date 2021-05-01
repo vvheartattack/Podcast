@@ -58,3 +58,11 @@ extension Podcast: PersistableRecord {
         container[Columns.feedUrl] = feedUrl
     }
 }
+
+//extension Podcast: Identifiable {
+//    var id: ObjectIdentifier {
+//        
+//    }
+//    
+//    
+//}
