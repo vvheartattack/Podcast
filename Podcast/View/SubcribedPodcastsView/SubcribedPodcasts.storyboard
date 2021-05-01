@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1Du-Jg-0Z4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gQR-QU-v1h">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -8,21 +8,40 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--已订阅-->
+        <!--Subcribed Podcasts View Controller-->
         <scene sceneID="and-gU-Dz0">
             <objects>
-                <viewController id="1Du-Jg-0Z4" sceneMemberID="viewController">
+                <viewController id="1Du-Jg-0Z4" customClass="SubcribedPodcastsViewController" customModule="Podcast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Np-Sg-Caq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="Twe-uI-QDe"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="已订阅" image="star" catalog="system" id="HYV-oN-Ha5"/>
+                    <navigationItem key="navigationItem" id="XsT-Zk-3fW"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Omj-XA-YYV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1286" y="-44"/>
+            <point key="canvasLocation" x="2195.6521739130435" y="-44.196428571428569"/>
+        </scene>
+        <!--已订阅-->
+        <scene sceneID="dof-Dp-yfc">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gQR-QU-v1h" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="已订阅" image="star" catalog="system" id="HYV-oN-Ha5"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AGK-lF-WWW">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="1Du-Jg-0Z4" kind="relationship" relationship="rootViewController" id="mma-Is-MaO"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BKY-th-1cQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1285.5072463768117" y="-44.196428571428569"/>
         </scene>
     </scenes>
     <resources>
