@@ -19,6 +19,7 @@ class PodcastDetailViewController: UIViewController {
     init(podcast: Podcast) {
         self.podcast = podcast
         super.init(nibName: nil, bundle: nil)
+        self.title = podcast.trackName
     }
     
     required init?(coder: NSCoder) {
@@ -148,7 +149,7 @@ class PodcastDetailViewController: UIViewController {
         
         // Set up podcastTitleLabel
         podcastTitleLabel.text = podcast.trackName
-        podcastTitleLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        podcastTitleLabel.font = .systemFont(ofSize: 17, weight: .bold)
         
         //Set up podcastDescriptionLabel
         podcastDescriptionLabel.text = podcast.artistName
