@@ -1,5 +1,5 @@
 //
-//  SubcribedPodcastsViewController.swift
+//  SubscribedPodcastsViewController.swift
 //  Podcast
 //
 //  Created by Mika on 2021/4/21.
@@ -9,21 +9,15 @@ import UIKit
 import GRDB
 import SnapKit
 
-class SubcribedPodcastsViewController: UIViewController {
+class SubscribedPodcastsViewController: UIViewController {
     var tableView: UITableView!
     var podcasts: [Podcast] = []
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: true) 
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "已订阅"
         self.tableView = UITableView()
         fetchData()
-        
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        self.navigationController?.hidesBarsOnTap = true
         
         NotificationCenter.default.addObserver(self, selector: #selector(didUpdateSubcribedPodcast(_:)), name: Notification.Name("PoscastSubscriptionUpdate"), object: nil)
         
@@ -50,7 +44,7 @@ class SubcribedPodcastsViewController: UIViewController {
     
 }
 
-extension SubcribedPodcastsViewController: UITableViewDelegate {
+extension SubscribedPodcastsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let podcastDetailVC = PodcastDetailViewController(podcast: podcasts[indexPath.row])
         self.navigationController?.pushViewController(podcastDetailVC, animated: true)
@@ -58,7 +52,7 @@ extension SubcribedPodcastsViewController: UITableViewDelegate {
     
 }
 
-extension SubcribedPodcastsViewController: UITableViewDataSource {
+extension SubscribedPodcastsViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
