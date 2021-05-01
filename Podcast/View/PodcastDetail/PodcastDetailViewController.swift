@@ -8,6 +8,7 @@
 import UIKit
 import Kingfisher
 import FeedKit
+import GRDB
 
 class PodcastDetailViewController: UIViewController {
 
@@ -97,14 +98,29 @@ class PodcastDetailViewController: UIViewController {
         // Set up subcribeButton
         let subcribeButton = UIButton(type: .custom)
 //        subcribeButton.frame = CGRect(x: <#T##CGFloat#>, y: <#T##CGFloat#>, width: <#T##CGFloat#>, height: <#T##CGFloat#>)
-        subcribeButton.setTitle("订阅", for: .normal)
+//        subcribeButton.setTitle("订阅", for: .normal)
         subcribeButton.setTitleColor(.white, for: .normal)
         subcribeButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        subcribeButton.backgroundColor = #colorLiteral(red: 0, green: 0.4739482999, blue: 0.9821667075, alpha: 1)
+//        subcribeButton.backgroundColor = #colorLiteral(red: 0, green: 0.4739482999, blue: 0.9821667075, alpha: 1)
         subcribeButton.layer.cornerRadius = 5
         subcribeButton.snp.makeConstraints { make in
             make.width.equalTo(65)
             make.height.equalTo(26)
+        }
+        do {
+            try GRDBHelper.shared.dbQueue.read { db in
+                let matchedNumber = try Podcast.filter(Podcast.Columns.trackId == podcast.trackId).fetchCount(db)
+                if matchedNumber == 0 {
+                    subcribeButton.setTitle("订阅", for: .normal)
+                    subcribeButton.backgroundColor = #colorLiteral(red: 0, green: 0.4739482999, blue: 0.9821667075, alpha: 1)
+                    
+                } else {
+                    subcribeButton.setTitle("已订阅", for: .normal)
+                    subcribeButton.backgroundColor = .gray
+                }
+            }
+        } catch {
+            print(error)
         }
         subcribeButton.addTarget(self, action: #selector(subcribeButtonClicked(sender:)), for: .touchUpInside)
         
@@ -215,7 +231,10 @@ class PodcastDetailViewController: UIViewController {
     }
     
     @objc func subcribeButtonClicked(sender: UIButton) {
-        if(sender.titleLabel?.text == "订阅") {
+
+
+                            
+        if sender.titleLabel?.text == "订阅" {
             sender.setTitle("已订阅", for: .normal)
             sender.backgroundColor = .gray
             GRDBHelper.shared.save(podcast)
@@ -224,6 +243,7 @@ class PodcastDetailViewController: UIViewController {
             sender.backgroundColor = #colorLiteral(red: 0, green: 0.4739482999, blue: 0.9821667075, alpha: 1)
             GRDBHelper.shared.deleteSubcribedPodcast(podcast)
         }
+        NotificationCenter.default.post(name: Notification.Name("PoscastSubscriptionUpdate"), object: nil)
     }
-
 }
+
