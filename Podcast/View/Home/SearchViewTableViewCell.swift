@@ -19,7 +19,7 @@ class SearchViewTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         // Setup titleLabel
-        titleLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
         
         // Setup descriptionLabel
         descriptionLabel.numberOfLines = 0
@@ -27,7 +27,9 @@ class SearchViewTableViewCell: UITableViewCell {
         descriptionLabel.font = UIFont.preferredFont(forTextStyle: .callout)
             
         // Setup cellIamgeView
-        cellIamgeView.layer.cornerRadius = 20
+        cellIamgeView.layer.cornerRadius = 8
+        cellIamgeView.layer.borderWidth = 1.0
+        cellIamgeView.layer.borderColor = #colorLiteral(red: 0.9198423028, green: 0.9198423028, blue: 0.9198423028, alpha: 1)
         cellIamgeView.clipsToBounds = true
         NSLayoutConstraint.activate([
             cellIamgeView.widthAnchor.constraint(equalToConstant: 120),
