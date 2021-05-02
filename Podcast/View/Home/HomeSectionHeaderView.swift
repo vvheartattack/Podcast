@@ -30,22 +30,24 @@ class HomeSectionHeaderView: UICollectionReusableView {
         sectionTitleLabel.font = .systemFont(ofSize: 24, weight: .bold)
     }
     
-    func setRightButton(for action: UIAction) {
+    func setRightButton(for action: UIAction?) {
         rightButton.removeFromSuperview()
         
-        rightButton = UIButton()
-        addSubview(rightButton)
-        sectionTitleLabel.snp.remakeConstraints { make in
-            make.leading.top.bottom.equalToSuperview()
+        if let action = action {
+            rightButton = UIButton()
+            addSubview(rightButton)
+            sectionTitleLabel.snp.remakeConstraints { make in
+                make.leading.top.bottom.equalToSuperview()
+            }
+            rightButton.snp.makeConstraints { make in
+                make.top.trailing.bottom.equalToSuperview()
+                make.leading.equalTo(sectionTitleLabel.snp.trailing)
+            }
+            rightButton.setTitleColor(.systemBlue, for: .normal)
+            rightButton.setTitleColor(.systemBlue.withAlphaComponent(0.5), for: .highlighted)
+            rightButton.setTitle("查看全部", for: .normal)
+            rightButton.titleLabel?.font = .systemFont(ofSize: 17)
+            rightButton.addAction(action, for: .touchUpInside)
         }
-        rightButton.snp.makeConstraints { make in
-            make.top.trailing.bottom.equalToSuperview()
-            make.leading.equalTo(sectionTitleLabel.snp.trailing)
-        }
-        rightButton.setTitleColor(.systemBlue, for: .normal)
-        rightButton.setTitleColor(.systemBlue.withAlphaComponent(0.5), for: .highlighted)
-        rightButton.setTitle("查看全部", for: .normal)
-        rightButton.titleLabel?.font = .systemFont(ofSize: 17)
-        rightButton.addAction(action, for: .touchUpInside)
     }
 }

@@ -51,6 +51,28 @@ class GRDBHelper {
         }
     }
     
+    func createSubscribedPodcastEpisodesTable() {
+        do {
+            try dbQueue.write { db in
+                try db.execute(sql: """
+                    CREATE TABLE IF NOT EXISTS subscribed_podcast_episode (
+                        guid TEXT PRIMARY KEY NOT NULL,
+                        title TEXT,
+                        pub_date TIMESTAMP,
+                        description TEXT,
+                        author TEXT,
+                        image_url TEXT,
+                        stream_url TEXT,
+                        track_id INTEGER,
+                        FOREIGN KEY(track_id) REFERENCES subscribed_podcast(track_id)
+                        )
+                    """)
+            }
+        } catch {
+            fatalError("\(error)")
+        }
+    }
+    
     func createDownloadedEpisodeTable() {
         do {
             try dbQueue.write { db in

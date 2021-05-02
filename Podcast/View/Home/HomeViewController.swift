@@ -11,8 +11,8 @@ class HomeViewController: UIViewController {
     static let sectionHeaderElementKind = "section-header-element-kind"
     
     var collectionView: UICollectionView!
-    var dataSource: UICollectionViewDiffableDataSource<Section, PodcastItem>!
-    var currentSnapshot: NSDiffableDataSourceSnapshot<Section, PodcastItem>!
+    var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>!
+    var currentSnapshot: NSDiffableDataSourceSnapshot<Section, AnyHashable>!
     
     /// An enum represents `UICollectionView`'s section, with a `String` raw value to indicate its name.
     enum Section: String {
@@ -27,6 +27,13 @@ class HomeViewController: UIViewController {
         var podcast: Podcast
         var section: Section
     }
+    
+    /// We cannot use same item across different sections, this is one workaroud that can make
+    /// same podcast different across different sections.
+    struct EpisodeItem: Hashable {
+        var episode: Episode
+        var section: Section
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +44,11 @@ class HomeViewController: UIViewController {
         
         // Observe `PoscastSubscriptionUpdate` event.
         NotificationCenter.default.addObserver(self, selector: #selector(fetchSubscribedPoscasts), name: .podcastSubscriptionUpdate, object: nil)
+        
+        // Observe `SubscribedPoscastEpisodesUpdate` event.
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchRecentUpdatedEpisodes), name: .podcastSubscriptionEpisodesUpdate, object: nil)
+        
+        SubscribeHelper.updateSubscribedPodcastEpisodes()
     }
     
     private func configureCollectionView() {
@@ -114,8 +126,23 @@ class HomeViewController: UIViewController {
         }
         
         func generateRecentUpdetedLayout() -> NSCollectionLayoutSection {
-            // Not implemented yet...
-            generateRecommendationLayout()
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            
+            let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(200), heightDimension: .estimated(284))
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
+            
+            let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+            let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: HomeViewController.sectionHeaderElementKind, alignment: .top)
+            
+            
+            let section = NSCollectionLayoutSection(group: group)
+            section.boundarySupplementaryItems = [sectionHeader]
+            section.orthogonalScrollingBehavior = .groupPaging
+            section.contentInsets = .init(top: 16, leading: 20, bottom: 16, trailing: 20)
+            section.interGroupSpacing = 12.0
+            
+            return section
         }
         
         /// We need to 'hide' some sections if they have no data. If we create and delete sections in data source, it will be a nightmare
@@ -146,17 +173,26 @@ class HomeViewController: UIViewController {
             cell.authorLabel.text = podcastItem.podcast.artistName
         }
         
-        dataSource = UICollectionViewDiffableDataSource<Section, PodcastItem>(collectionView: collectionView) { (collectionView: UICollectionView, indexPath: IndexPath, podcastItem: PodcastItem) -> UICollectionViewCell? in
+        let recentlyUpdateEpisodeCellRegistration = UICollectionView.CellRegistration<RecentlyUpdateEpisodeCell, EpisodeItem> { (cell, indexPath, episodeItem) in
+            cell.thumbnailView.kf.setImage(with: URL(string: episodeItem.episode.imageUrl!))
+            cell.titleLabel.text = episodeItem.episode.title
+            cell.authorLabel.text = episodeItem.episode.author
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            cell.tagLabel.text = "更新 · \(dateFormatter.string(from: episodeItem.episode.pubDate))"
+        }
+        
+        dataSource = UICollectionViewDiffableDataSource<Section, AnyHashable>(collectionView: collectionView) { (collectionView: UICollectionView, indexPath: IndexPath, item: AnyHashable) -> UICollectionViewCell? in
             let section = self.currentSnapshot.sectionIdentifiers[indexPath.section]
             switch section {
             case .recommendation:
-                let cell = collectionView.dequeueConfiguredReusableCell(using: recommendationPodcastCellRegistration, for: indexPath, item: podcastItem)
+                let cell = collectionView.dequeueConfiguredReusableCell(using: recommendationPodcastCellRegistration, for: indexPath, item: (item as! PodcastItem))
                 return cell
             case .recentSubscribed:
-                let cell = collectionView.dequeueConfiguredReusableCell(using: recentlySubscribedPodcastCellRegistration, for: indexPath, item: podcastItem)
+                let cell = collectionView.dequeueConfiguredReusableCell(using: recentlySubscribedPodcastCellRegistration, for: indexPath, item: (item as! PodcastItem))
                 return cell
             case .recentUpdeted:
-                let cell = collectionView.dequeueConfiguredReusableCell(using: recentlySubscribedPodcastCellRegistration, for: indexPath, item: podcastItem)
+                let cell = collectionView.dequeueConfiguredReusableCell(using: recentlyUpdateEpisodeCellRegistration, for: indexPath, item: (item as! EpisodeItem))
                 return cell
             }
         }
@@ -176,7 +212,7 @@ class HomeViewController: UIViewController {
                         self.navigationController?.pushViewController(SubscribedPodcastsViewController(), animated: true)
                     }))
                 default:
-                    return
+                    supplementaryView.setRightButton(for: nil)
                 }
             }
         }
@@ -193,12 +229,12 @@ class HomeViewController: UIViewController {
     
     private func generateSnapshot() {
         currentSnapshot = NSDiffableDataSourceSnapshot
-            <Section, PodcastItem>()
-        currentSnapshot.appendSections([.recommendation, .recentSubscribed, .recentUpdeted])
+            <Section, AnyHashable>()
+        currentSnapshot.appendSections([.recommendation, .recentUpdeted, .recentSubscribed])
         
         fetchRecommendations()
         fetchSubscribedPoscasts()
-//        fetchRecentUpdatedEpisodes()
+        fetchRecentUpdatedEpisodes()
         
         dataSource.apply(currentSnapshot, animatingDifferences: false)
     }
@@ -224,19 +260,37 @@ class HomeViewController: UIViewController {
         let oldItems = currentSnapshot.itemIdentifiers(inSection: .recentSubscribed)
         currentSnapshot.deleteItems(oldItems)
         currentSnapshot.appendItems(podcasts.map { PodcastItem(podcast: $0, section: .recentSubscribed)}, toSection: .recentSubscribed)
-        dataSource.apply(currentSnapshot)
+        self.dataSource.apply(self.currentSnapshot)
     }
     
+    /// This method is called when: 1. generating initial data source.
+    /// 2. `SubscribedPoscastEpisodesUpdate` happened.
+    @objc
     private func fetchRecentUpdatedEpisodes() {
-        // Not implemented yet...
+        DispatchQueue.main.async { [weak self] in
+            if let strongSelf = self {
+                // 在主线程执行 UI 更新操作，因为这个函数可能在子线程被调用
+                let episodes = SubscribeHelper.fetchAllSubscribedPodcastEpisodes()
+                let oldItems = strongSelf.currentSnapshot.itemIdentifiers(inSection: .recentUpdeted)
+                strongSelf.currentSnapshot.deleteItems(oldItems)
+                strongSelf.currentSnapshot.appendItems(episodes.map { EpisodeItem(episode: $0, section: .recentUpdeted)}, toSection: .recentUpdeted)
+                strongSelf.dataSource.apply(strongSelf.currentSnapshot)
+            }
+        }
     }
 }
 
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let podcstItem = dataSource.itemIdentifier(for: indexPath) {
+        let section = currentSnapshot.sectionIdentifiers[indexPath.section]
+        switch section {
+        case .recommendation, .recentSubscribed:
+            let podcstItem = dataSource.itemIdentifier(for: indexPath) as! PodcastItem
             self.navigationController?.pushViewController(PodcastDetailViewController(podcast: podcstItem.podcast), animated: true)
-            collectionView.deselectItem(at: indexPath, animated: true)
+        default:
+            let episodeItem = dataSource.itemIdentifier(for: indexPath) as! EpisodeItem
+            self.navigationController?.pushViewController(PlayerViewController(episode: episodeItem.episode), animated: true)
         }
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
