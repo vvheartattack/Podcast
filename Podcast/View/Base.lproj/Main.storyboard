@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uEf-u3-fDf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uEf-u3-fDf">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -46,10 +46,10 @@
             </objects>
             <point key="canvasLocation" x="879" y="105"/>
         </scene>
-        <!--SubcribedPodcasts-->
+        <!--SubscribedPodcasts-->
         <scene sceneID="dvW-pK-iKA">
             <objects>
-                <viewControllerPlaceholder storyboardName="SubcribedPodcasts" id="heu-1F-e6D" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="SubscribedPodcasts" id="heu-1F-e6D" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" id="lh9-6X-ipL"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dnG-hf-Xy8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
