@@ -26,8 +26,7 @@ class GRDBHelper {
                     
                     try db.execute(sql: """
                         CREATE TABLE IF NOT EXISTS subscribed_podcast (
-                            id INTEGER PRIMARY KEY AUTOINCREMENT,
-                            track_id INTEGER NOT NULL,
+                            track_id INTEGER PRIMARY KEY NOT NULL,
                             track_name TEXT,
                             artwork_url TEXT,
                             track_count INTEGER,
@@ -56,8 +55,7 @@ class GRDBHelper {
             try dbQueue.write { db in
                 try db.execute(sql: """
                     CREATE TABLE IF NOT EXISTS downloaded_episode (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        guid TEXT NOT NULL,
+                        guid TEXt PRIMARY KEY NOT NULL,
                         title TEXT,
                         description TEXT,
                         author TEXT,
