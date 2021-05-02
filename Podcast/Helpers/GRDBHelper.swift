@@ -102,35 +102,14 @@ class GRDBHelper {
         }
     }
     
-    func deleteSubcribedPodcast<T: PersistableRecord>(_ data: T) {
+    func delete<T: PersistableRecord>(_ data: T) {
         do {
-             try dbQueue.write { db in
+            try dbQueue.write { db in
                 try data.delete(db)
             }
         } catch {
             print(error)
         }
     }
-    
-//    func fetchOne<T: FetchableRecord & TableRecord>(_ type: T.Type, podcast: Podcast) -> T? {
-//        do {
-//            return try dbQueue.read { db in
-//                try db.filter(Column("tack_id" == )
-//                                .fetchCount(db)
-//            }
-//        }
-//    }
-    
-//    func fetchSubcribedPodcastsCount<T: PersistableRecord>(_ type: T.Type) -> Int {
-//        do {
-//            return  try dbQueue.read { db in
-//                try type.fetchCount(db)
-//                
-//            }
-//        } catch {
-//            print(error)
-//        }
-//    }
-    
     
 }

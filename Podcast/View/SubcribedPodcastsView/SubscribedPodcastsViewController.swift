@@ -19,7 +19,7 @@ class SubscribedPodcastsViewController: UIViewController {
         self.tableView = UITableView()
         fetchData()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateSubcribedPodcast(_:)), name: Notification.Name("PoscastSubscriptionUpdate"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateSubscribedPodcast(_:)), name: .podcastSubscriptionUpdate, object: nil)
         
         // Set tableView
         self.view.addSubview(tableView)
@@ -32,7 +32,8 @@ class SubscribedPodcastsViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    @objc func didUpdateSubcribedPodcast(_ notification: Notification)
+    
+    @objc func didUpdateSubscribedPodcast(_ notification: Notification)
     {
         fetchData()
     }

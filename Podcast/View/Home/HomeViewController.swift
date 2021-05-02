@@ -36,7 +36,7 @@ class HomeViewController: UIViewController {
         generateSnapshot()
         
         // Observe `PoscastSubscriptionUpdate` event.
-        NotificationCenter.default.addObserver(self, selector: #selector(fetchSubscribedPoscasts), name: Notification.Name("PoscastSubscriptionUpdate"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchSubscribedPoscasts), name: .podcastSubscriptionUpdate, object: nil)
     }
     
     private func configureCollectionView() {
@@ -217,7 +217,7 @@ class HomeViewController: UIViewController {
     
     
     /// This method is called when: 1. generating initial data source.
-    /// 2. `Notification.Name("PoscastSubscriptionUpdate")` happened.
+    /// 2. `PoscastSubscriptionUpdate` happened.
     @objc
     private func fetchSubscribedPoscasts() {
         let podcasts = GRDBHelper.shared.fetchAll(Podcast.order(Podcast.Columns.subscribeTime).reversed())!
