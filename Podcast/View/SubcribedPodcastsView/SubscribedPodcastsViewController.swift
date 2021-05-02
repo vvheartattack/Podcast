@@ -38,7 +38,7 @@ class SubscribedPodcastsViewController: UIViewController {
     }
     
     func fetchData() {
-        podcasts = GRDBHelper.shared.fetchAll(Podcast.self)!
+        podcasts = GRDBHelper.shared.fetchAll(Podcast.order(Podcast.Columns.subscribeTime).reversed())!
         self.tableView.reloadData()
     }
     

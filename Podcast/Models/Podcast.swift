@@ -33,6 +33,7 @@ extension Podcast: TableRecord {
         case artworkUrl600 = "artwork_url"
         case trackCount = "track_count"
         case feedUrl = "feed_url"
+        case subscribeTime = "subscribe_time"
     }
 }
 
@@ -44,7 +45,6 @@ extension Podcast: FetchableRecord {
         artistName = row[Columns.artistName]
         feedUrl = row[Columns.feedUrl]
         trackCount = row[Columns.trackCount]
-        
     }
 }
 

@@ -31,7 +31,8 @@ class GRDBHelper {
                             artwork_url TEXT,
                             track_count INTEGER,
                             artist_name TEXT,
-                            feed_url TEXT
+                            feed_url TEXT,
+                            subscribe_time DATETIME DEFAULT CURRENT_TIMESTAMP
                             )
                         """)
                     
@@ -83,6 +84,17 @@ class GRDBHelper {
         do {
             return try dbQueue.read { db in
                 try type.fetchAll(db)
+            }
+        } catch {
+            print(error)
+            return nil
+        }
+    }
+    
+    func fetchAll<T: TableRecord & FetchableRecord>(_ request: QueryInterfaceRequest<T>) -> [T]? {
+        do {
+            return try dbQueue.read { db in
+                try request.fetchAll(db)
             }
         } catch {
             print(error)

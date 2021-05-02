@@ -220,7 +220,7 @@ class HomeViewController: UIViewController {
     /// 2. `Notification.Name("PoscastSubscriptionUpdate")` happened.
     @objc
     private func fetchSubscribedPoscasts() {
-        let podcasts = GRDBHelper.shared.fetchAll(Podcast.self)!
+        let podcasts = GRDBHelper.shared.fetchAll(Podcast.order(Podcast.Columns.subscribeTime).reversed())!
         let oldItems = currentSnapshot.itemIdentifiers(inSection: .recentSubscribed)
         currentSnapshot.deleteItems(oldItems)
         currentSnapshot.appendItems(podcasts.map { PodcastItem(podcast: $0, section: .recentSubscribed)}, toSection: .recentSubscribed)
