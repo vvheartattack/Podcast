@@ -35,7 +35,7 @@ class RecommendationPodcastCell: UICollectionViewCell {
         
         contentView.addSubview(titleLabel)
         titleLabel.numberOfLines = 1
-        titleLabel.font = .systemFont(ofSize: 17, weight: .bold)
+        titleLabel.font = .systemFont(ofSize: 17, weight: .medium)
         titleLabel.snp.makeConstraints { make in
             make.top.trailing.equalToSuperview()
             make.leading.equalTo(thumbnailView.snp.trailing).offset(5)
