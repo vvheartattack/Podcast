@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Subscribed Podcasts View Controller-->
+        <!--已订阅-->
         <scene sceneID="and-gU-Dz0">
             <objects>
                 <viewController id="1Du-Jg-0Z4" customClass="SubscribedPodcastsViewController" customModule="Podcast" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,7 +18,7 @@
                         <viewLayoutGuide key="safeArea" id="Twe-uI-QDe"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="XsT-Zk-3fW"/>
+                    <navigationItem key="navigationItem" title="已订阅" id="XsT-Zk-3fW"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Omj-XA-YYV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -30,8 +30,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gQR-QU-v1h" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="已订阅" image="star" catalog="system" id="HYV-oN-Ha5"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AGK-lF-WWW">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="AGK-lF-WWW">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

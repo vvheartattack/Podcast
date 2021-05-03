@@ -95,34 +95,24 @@ class PodcastDetailViewController: UIViewController {
         let detailViewScrollView = UIScrollView()
         
         
-        // Set up subcribeButton
-        let subcribeButton = UIButton(type: .custom)
-//        subcribeButton.frame = CGRect(x: <#T##CGFloat#>, y: <#T##CGFloat#>, width: <#T##CGFloat#>, height: <#T##CGFloat#>)
-//        subcribeButton.setTitle("订阅", for: .normal)
-        subcribeButton.setTitleColor(.white, for: .normal)
-        subcribeButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-//        subcribeButton.backgroundColor = #colorLiteral(red: 0, green: 0.4739482999, blue: 0.9821667075, alpha: 1)
-        subcribeButton.layer.cornerRadius = 5
-        subcribeButton.snp.makeConstraints { make in
+        // Set up subscribeButton
+        let subscribeButton = UIButton(type: .custom)
+        subscribeButton.setTitleColor(.white, for: .normal)
+        subscribeButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        subscribeButton.layer.cornerRadius = 5
+        subscribeButton.snp.makeConstraints { make in
             make.width.equalTo(65)
             make.height.equalTo(26)
         }
-        do {
-            try GRDBHelper.shared.dbQueue.read { db in
-                let matchedNumber = try Podcast.filter(Podcast.Columns.trackId == podcast.trackId).fetchCount(db)
-                if matchedNumber == 0 {
-                    subcribeButton.setTitle("订阅", for: .normal)
-                    subcribeButton.backgroundColor = #colorLiteral(red: 0, green: 0.4739482999, blue: 0.9821667075, alpha: 1)
-                    
-                } else {
-                    subcribeButton.setTitle("已订阅", for: .normal)
-                    subcribeButton.backgroundColor = .gray
-                }
-            }
-        } catch {
-            print(error)
+        if SubscribeHelper.isSubscribed(podcast) {
+            subscribeButton.setTitle("已订阅", for: .normal)
+            subscribeButton.backgroundColor = .gray
+        } else {
+            subscribeButton.setTitle("订阅", for: .normal)
+            subscribeButton.backgroundColor = #colorLiteral(red: 0, green: 0.4739482999, blue: 0.9821667075, alpha: 1)
         }
-        subcribeButton.addTarget(self, action: #selector(subcribeButtonClicked(sender:)), for: .touchUpInside)
+
+        subscribeButton.addTarget(self, action: #selector(subscribeButtonClicked(sender:)), for: .touchUpInside)
         
         // Set up detailViewScrollView
         detailViewScrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -159,7 +149,7 @@ class PodcastDetailViewController: UIViewController {
         // Set up podcastLabelsStackView
         podcastLabelsStackView.addArrangedSubview(podcastTitleLabel)
         podcastLabelsStackView.addArrangedSubview(podcastDescriptionLabel)
-        podcastLabelsStackView.addArrangedSubview(subcribeButton)
+        podcastLabelsStackView.addArrangedSubview(subscribeButton)
         podcastLabelsStackView.axis = .vertical
         podcastLabelsStackView.distribution = .equalSpacing
         podcastLabelsStackView.alignment = .leading
@@ -230,20 +220,16 @@ class PodcastDetailViewController: UIViewController {
         }
     }
     
-    @objc func subcribeButtonClicked(sender: UIButton) {
-
-
-                            
+    @objc func subscribeButtonClicked(sender: UIButton) {
         if sender.titleLabel?.text == "订阅" {
             sender.setTitle("已订阅", for: .normal)
             sender.backgroundColor = .gray
-            GRDBHelper.shared.save(podcast)
+            SubscribeHelper.subscribe(podcast: podcast)
         } else {
             sender.setTitle("订阅", for: .normal)
             sender.backgroundColor = #colorLiteral(red: 0, green: 0.4739482999, blue: 0.9821667075, alpha: 1)
-            GRDBHelper.shared.deleteSubcribedPodcast(podcast)
+            SubscribeHelper.unsubscribe(podcast: podcast)
         }
-        NotificationCenter.default.post(name: Notification.Name("PoscastSubscriptionUpdate"), object: nil)
     }
 }
 

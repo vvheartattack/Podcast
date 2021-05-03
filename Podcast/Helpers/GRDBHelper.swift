@@ -51,6 +51,30 @@ class GRDBHelper {
         }
     }
     
+    func createSubscribedPodcastEpisodesTable() {
+        do {
+            try dbQueue.write { db in
+                try db.execute(sql: """
+                    CREATE TABLE IF NOT EXISTS subscribed_podcast_episode (
+                        guid TEXT PRIMARY KEY NOT NULL,
+                        title TEXT,
+                        pub_date TIMESTAMP,
+                        description TEXT,
+                        author TEXT,
+                        image_url TEXT,
+                        stream_url TEXT,
+                        track_id INTEGER,
+                        FOREIGN KEY(track_id) REFERENCES subscribed_podcast(track_id)
+                        )
+                    """)
+            }
+        } catch {
+            fatalError("\(error)")
+        }
+    }
+    
+
+    
     func createDownloadedEpisodeTable() {
         do {
             try dbQueue.write { db in
@@ -91,7 +115,19 @@ class GRDBHelper {
         }
     }
     
-    func deleteSubcribedPodcast<T: PersistableRecord>(_ data: T) {
+    func fetchAll<T: TableRecord & FetchableRecord>(_ request: QueryInterfaceRequest<T>) -> [T]? {
+        do {
+            return try dbQueue.read { db in
+                try request.fetchAll(db)
+            }
+        } catch {
+            print(error)
+            return nil
+        }
+    }
+
+    
+    func delete<T: PersistableRecord>(_ data: T) {
         do {
              try dbQueue.write { db in
                 try data.delete(db)
@@ -100,26 +136,4 @@ class GRDBHelper {
             print(error)
         }
     }
-    
-//    func fetchOne<T: FetchableRecord & TableRecord>(_ type: T.Type, podcast: Podcast) -> T? {
-//        do {
-//            return try dbQueue.read { db in
-//                try db.filter(Column("tack_id" == )
-//                                .fetchCount(db)
-//            }
-//        }
-//    }
-    
-//    func fetchSubcribedPodcastsCount<T: PersistableRecord>(_ type: T.Type) -> Int {
-//        do {
-//            return  try dbQueue.read { db in
-//                try type.fetchCount(db)
-//                
-//            }
-//        } catch {
-//            print(error)
-//        }
-//    }
-    
-    
 }

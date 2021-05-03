@@ -13,19 +13,14 @@ class SubscribedPodcastsViewController: UIViewController {
     var tableView: UITableView!
     var podcasts: [Podcast] = []
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: true) 
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.largeTitleDisplayMode = .always
+        self.navigationItem.title = "已订阅"
         self.tableView = UITableView()
         fetchData()
         
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        self.navigationController?.hidesBarsOnTap = true
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateSubcribedPodcast(_:)), name: Notification.Name("PoscastSubscriptionUpdate"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateSubscribedPodcast(_:)), name: .podcastSubscriptionUpdate, object: nil)
         
         // Set tableView
         self.view.addSubview(tableView)
@@ -38,13 +33,13 @@ class SubscribedPodcastsViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    @objc func didUpdateSubcribedPodcast(_ notification: Notification)
+    @objc func didUpdateSubscribedPodcast(_ notification: Notification)
     {
         fetchData()
     }
     
     func fetchData() {
-        podcasts = GRDBHelper.shared.fetchAll(Podcast.self)!
+        podcasts = SubscribeHelper.fetchAllByTimeOrder()
         self.tableView.reloadData()
     }
     

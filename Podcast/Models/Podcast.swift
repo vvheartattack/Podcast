@@ -33,6 +33,8 @@ extension Podcast: TableRecord {
         case artworkUrl600 = "artwork_url"
         case trackCount = "track_count"
         case feedUrl = "feed_url"
+        case subscribeTime = "subscribe_time"
+
     }
 }
 
