@@ -9,7 +9,7 @@ import UIKit
 import GRDB
 import SnapKit
 
-class SubcribedPodcastsViewController: UIViewController {
+class SubscribedPodcastsViewController: UIViewController {
     var tableView: UITableView!
     var podcasts: [Podcast] = []
     
@@ -50,7 +50,7 @@ class SubcribedPodcastsViewController: UIViewController {
     
 }
 
-extension SubcribedPodcastsViewController: UITableViewDelegate {
+extension SubscribedPodcastsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let podcastDetailVC = PodcastDetailViewController(podcast: podcasts[indexPath.row])
         self.navigationController?.pushViewController(podcastDetailVC, animated: true)
@@ -58,7 +58,7 @@ extension SubcribedPodcastsViewController: UITableViewDelegate {
     
 }
 
-extension SubcribedPodcastsViewController: UITableViewDataSource {
+extension SubscribedPodcastsViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
