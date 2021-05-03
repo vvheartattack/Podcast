@@ -28,6 +28,7 @@
 		093942B0263FF46000A9FD66 /* RecentlySubscribedPodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093942AF263FF46000A9FD66 /* RecentlySubscribedPodcastCell.swift */; };
 		093942B3263FF47D00A9FD66 /* RecommendationPodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093942B2263FF47D00A9FD66 /* RecommendationPodcastCell.swift */; };
 		093942B6263FF49E00A9FD66 /* HomeSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093942B5263FF49E00A9FD66 /* HomeSectionHeaderView.swift */; };
+		093942BB2640205100A9FD66 /* SearchView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 093942BA2640205100A9FD66 /* SearchView.storyboard */; };
 		0948E0D126106B6C00BAC00E /* SearchViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0948E0D026106B6B00BAC00E /* SearchViewTableViewCell.swift */; };
 		09E0E8F1262733890032E806 /* GRDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E0E8F0262733890032E806 /* GRDBHelper.swift */; };
 		09E0E912262F283C0032E806 /* SubcribedPodcasts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09E0E911262F283C0032E806 /* SubcribedPodcasts.storyboard */; };
@@ -59,6 +60,7 @@
 		093942AF263FF46000A9FD66 /* RecentlySubscribedPodcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlySubscribedPodcastCell.swift; sourceTree = "<group>"; };
 		093942B2263FF47D00A9FD66 /* RecommendationPodcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationPodcastCell.swift; sourceTree = "<group>"; };
 		093942B5263FF49E00A9FD66 /* HomeSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionHeaderView.swift; sourceTree = "<group>"; };
+		093942BA2640205100A9FD66 /* SearchView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchView.storyboard; sourceTree = "<group>"; };
 		0948E0D026106B6B00BAC00E /* SearchViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewTableViewCell.swift; sourceTree = "<group>"; };
 		09E0E8F0262733890032E806 /* GRDBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRDBHelper.swift; sourceTree = "<group>"; };
 		09E0E911262F283C0032E806 /* SubcribedPodcasts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SubcribedPodcasts.storyboard; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		093530EA2606420E00DAE739 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				093942B82640200D00A9FD66 /* SearchView */,
 				09E0E8F3262C89430032E806 /* SubcribedPodcastsView */,
 				0933B2E7261997D800C8C941 /* Player */,
 				0935310726070DD200DAE739 /* PodcastDetail */,
@@ -158,8 +161,6 @@
 			children = (
 				093530F12606426400DAE739 /* Home.storyboard */,
 				093530FF2606470D00DAE739 /* HomeViewController.swift */,
-				0948E0D026106B6B00BAC00E /* SearchViewTableViewCell.swift */,
-				093942AC263FF3FC00A9FD66 /* SearchViewController.swift */,
 				093942AF263FF46000A9FD66 /* RecentlySubscribedPodcastCell.swift */,
 				093942B2263FF47D00A9FD66 /* RecommendationPodcastCell.swift */,
 				093942B5263FF49E00A9FD66 /* HomeSectionHeaderView.swift */,
@@ -191,6 +192,16 @@
 				09E0E8F0262733890032E806 /* GRDBHelper.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		093942B82640200D00A9FD66 /* SearchView */ = {
+			isa = PBXGroup;
+			children = (
+				0948E0D026106B6B00BAC00E /* SearchViewTableViewCell.swift */,
+				093942AC263FF3FC00A9FD66 /* SearchViewController.swift */,
+				093942BA2640205100A9FD66 /* SearchView.storyboard */,
+			);
+			path = SearchView;
 			sourceTree = "<group>";
 		};
 		09E0E8F3262C89430032E806 /* SubcribedPodcastsView */ = {
@@ -281,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0935308025E7482300DAE739 /* LaunchScreen.storyboard in Resources */,
+				093942BB2640205100A9FD66 /* SearchView.storyboard in Resources */,
 				093530F9260642E000DAE739 /* MyPage.storyboard in Resources */,
 				0935307D25E7482300DAE739 /* Assets.xcassets in Resources */,
 				0935307B25E7482200DAE739 /* Main.storyboard in Resources */,
