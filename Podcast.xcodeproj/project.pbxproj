@@ -30,6 +30,7 @@
 		093942BB2640205100A9FD66 /* SearchView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 093942BA2640205100A9FD66 /* SearchView.storyboard */; };
 		093942C026405A9800A9FD66 /* SubscribeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093942BF26405A9800A9FD66 /* SubscribeHelper.swift */; };
 		093942C32640600E00A9FD66 /* RecentlyUpdateEpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093942C22640600E00A9FD66 /* RecentlyUpdateEpisodeCell.swift */; };
+		093942C62640708600A9FD66 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 093942C52640708600A9FD66 /* Storyboard.storyboard */; };
 		0948E0D126106B6C00BAC00E /* SearchViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0948E0D026106B6B00BAC00E /* SearchViewTableViewCell.swift */; };
 		09E0E8F1262733890032E806 /* GRDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E0E8F0262733890032E806 /* GRDBHelper.swift */; };
 		09E0E912262F283C0032E806 /* SubcribedPodcasts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09E0E911262F283C0032E806 /* SubcribedPodcasts.storyboard */; };
@@ -63,6 +64,7 @@
 		093942BA2640205100A9FD66 /* SearchView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchView.storyboard; sourceTree = "<group>"; };
 		093942BF26405A9800A9FD66 /* SubscribeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeHelper.swift; sourceTree = "<group>"; };
 		093942C22640600E00A9FD66 /* RecentlyUpdateEpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyUpdateEpisodeCell.swift; sourceTree = "<group>"; };
+		093942C52640708600A9FD66 /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		0948E0D026106B6B00BAC00E /* SearchViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewTableViewCell.swift; sourceTree = "<group>"; };
 		09E0E8F0262733890032E806 /* GRDBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRDBHelper.swift; sourceTree = "<group>"; };
 		09E0E911262F283C0032E806 /* SubcribedPodcasts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SubcribedPodcasts.storyboard; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				093530FC260646FF00DAE739 /* MyPageViewController.swift */,
+				093942C52640708600A9FD66 /* Storyboard.storyboard */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				0935307D25E7482300DAE739 /* Assets.xcassets in Resources */,
 				0935307B25E7482200DAE739 /* Main.storyboard in Resources */,
 				093530F32606426400DAE739 /* Home.storyboard in Resources */,
+				093942C62640708600A9FD66 /* Storyboard.storyboard in Resources */,
 				09E0E912262F283C0032E806 /* SubcribedPodcasts.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

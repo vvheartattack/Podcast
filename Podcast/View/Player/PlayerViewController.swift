@@ -99,6 +99,8 @@ class PlayerViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         let imageContainerView = UIView()
         view.addSubview(imageContainerView)
+        let rightBarButtonItem = UIBarButtonItem()
+        rightBarButtonItem.image = UIImage(systemName: "square.and.arrow.up")
         
         // Set episodeImageView
         episodeImageView = UIImageView()
@@ -212,6 +214,8 @@ class PlayerViewController: UIViewController {
             make.centerX.centerY.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(16)
         }
+
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem
         
         return view
     }
