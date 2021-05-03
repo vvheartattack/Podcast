@@ -11,7 +11,7 @@
         <!--Subscribed Podcasts View Controller-->
         <scene sceneID="and-gU-Dz0">
             <objects>
-                <viewController id="1Du-Jg-0Z4" userLabel="Subscribed Podcasts View Controller" customClass="SubscribedPodcastsViewController" customModule="Podcast" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1Du-Jg-0Z4" customClass="SubscribedPodcastsViewController" customModule="Podcast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Np-Sg-Caq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
