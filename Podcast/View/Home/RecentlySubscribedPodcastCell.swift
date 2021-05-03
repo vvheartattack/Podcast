@@ -45,7 +45,7 @@ class RecentlySubscribedPodcastCell: UICollectionViewCell {
         
         contentView.addSubview(titleLabel)
         titleLabel.numberOfLines = 1
-        titleLabel.font = .systemFont(ofSize: 17, weight: .bold)
+        titleLabel.font = .systemFont(ofSize: 17, weight: .medium)
         titleLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(tagLabel.snp.bottom).offset(4)
