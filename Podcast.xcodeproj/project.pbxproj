@@ -24,6 +24,10 @@
 		093531002606470D00DAE739 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093530FF2606470D00DAE739 /* HomeViewController.swift */; };
 		0935310926070E1F00DAE739 /* PodcastDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935310826070E1F00DAE739 /* PodcastDetailViewController.swift */; };
 		0935310E26087C5000DAE739 /* RSSFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935310D26087C5000DAE739 /* RSSFeed.swift */; };
+		093942AD263FF3FC00A9FD66 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093942AC263FF3FC00A9FD66 /* SearchViewController.swift */; };
+		093942B0263FF46000A9FD66 /* RecentlySubscribedPodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093942AF263FF46000A9FD66 /* RecentlySubscribedPodcastCell.swift */; };
+		093942B3263FF47D00A9FD66 /* RecommendationPodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093942B2263FF47D00A9FD66 /* RecommendationPodcastCell.swift */; };
+		093942B6263FF49E00A9FD66 /* HomeSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093942B5263FF49E00A9FD66 /* HomeSectionHeaderView.swift */; };
 		0948E0D126106B6C00BAC00E /* SearchViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0948E0D026106B6B00BAC00E /* SearchViewTableViewCell.swift */; };
 		09E0E8F1262733890032E806 /* GRDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E0E8F0262733890032E806 /* GRDBHelper.swift */; };
 		09E0E912262F283C0032E806 /* SubcribedPodcasts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09E0E911262F283C0032E806 /* SubcribedPodcasts.storyboard */; };
@@ -51,6 +55,10 @@
 		093530FF2606470D00DAE739 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		0935310826070E1F00DAE739 /* PodcastDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastDetailViewController.swift; sourceTree = "<group>"; };
 		0935310D26087C5000DAE739 /* RSSFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSFeed.swift; sourceTree = "<group>"; };
+		093942AC263FF3FC00A9FD66 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		093942AF263FF46000A9FD66 /* RecentlySubscribedPodcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlySubscribedPodcastCell.swift; sourceTree = "<group>"; };
+		093942B2263FF47D00A9FD66 /* RecommendationPodcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationPodcastCell.swift; sourceTree = "<group>"; };
+		093942B5263FF49E00A9FD66 /* HomeSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionHeaderView.swift; sourceTree = "<group>"; };
 		0948E0D026106B6B00BAC00E /* SearchViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewTableViewCell.swift; sourceTree = "<group>"; };
 		09E0E8F0262733890032E806 /* GRDBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRDBHelper.swift; sourceTree = "<group>"; };
 		09E0E911262F283C0032E806 /* SubcribedPodcasts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SubcribedPodcasts.storyboard; sourceTree = "<group>"; };
@@ -151,6 +159,10 @@
 				093530F12606426400DAE739 /* Home.storyboard */,
 				093530FF2606470D00DAE739 /* HomeViewController.swift */,
 				0948E0D026106B6B00BAC00E /* SearchViewTableViewCell.swift */,
+				093942AC263FF3FC00A9FD66 /* SearchViewController.swift */,
+				093942AF263FF46000A9FD66 /* RecentlySubscribedPodcastCell.swift */,
+				093942B2263FF47D00A9FD66 /* RecommendationPodcastCell.swift */,
+				093942B5263FF49E00A9FD66 /* HomeSectionHeaderView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -326,6 +338,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				093942AD263FF3FC00A9FD66 /* SearchViewController.swift in Sources */,
 				0948E0D126106B6C00BAC00E /* SearchViewTableViewCell.swift in Sources */,
 				093530BA25FF444900DAE739 /* NetworkManager.swift in Sources */,
 				09E0E8F1262733890032E806 /* GRDBHelper.swift in Sources */,
@@ -333,6 +346,9 @@
 				0935310926070E1F00DAE739 /* PodcastDetailViewController.swift in Sources */,
 				0935307825E7482200DAE739 /* ViewController.swift in Sources */,
 				093530FD260646FF00DAE739 /* MyPageViewController.swift in Sources */,
+				093942B0263FF46000A9FD66 /* RecentlySubscribedPodcastCell.swift in Sources */,
+				093942B3263FF47D00A9FD66 /* RecommendationPodcastCell.swift in Sources */,
+				093942B6263FF49E00A9FD66 /* HomeSectionHeaderView.swift in Sources */,
 				0933B2E92619981E00C8C941 /* PlayerViewController.swift in Sources */,
 				093531002606470D00DAE739 /* HomeViewController.swift in Sources */,
 				093530C825FF4CF200DAE739 /* Podcast.swift in Sources */,

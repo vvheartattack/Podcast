@@ -8,7 +8,7 @@
 import Foundation
 import GRDB
 
-struct Podcast: Decodable {
+struct Podcast: Decodable, Hashable {
     var trackId: Int
     var trackName: String?
     var artistName: String?
