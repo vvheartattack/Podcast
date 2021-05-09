@@ -85,6 +85,15 @@ class PodcastDetailViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .never
         self.view.backgroundColor = .systemBackground
         
+        
+        if let _ = podcast.feedUrl {
+            let rightBarButtonItemShare = UIBarButtonItem()
+            rightBarButtonItemShare.image = UIImage(systemName: "square.and.arrow.up")
+            rightBarButtonItemShare.action = #selector(sharePodcast)
+            rightBarButtonItemShare.target = self
+            navigationItem.rightBarButtonItem = rightBarButtonItemShare
+        }
+        
         let podcastImageView = UIImageView()
         let podcastTitleLabel = UILabel()
         let podcastDescriptionLabel = UILabel()
@@ -229,6 +238,17 @@ class PodcastDetailViewController: UIViewController {
             sender.setTitle("订阅", for: .normal)
             sender.backgroundColor = #colorLiteral(red: 0, green: 0.4739482999, blue: 0.9821667075, alpha: 1)
             SubscribeHelper.unsubscribe(podcast: podcast)
+        }
+    }
+    
+    @objc func sharePodcast() {
+        if let feedUrl = podcast.feedUrl {
+            let episodeStreamItem = URL(string: feedUrl.replacingOccurrences(of: "https", with: "podcast").replacingOccurrences(of: "http", with: "podcast"))!
+            
+            let activityViewController : UIActivityViewController = UIActivityViewController(
+                activityItems: [episodeStreamItem], applicationActivities: nil)
+            activityViewController.isModalInPresentation = true
+            self.present(activityViewController, animated: true, completion: nil)
         }
     }
 }
