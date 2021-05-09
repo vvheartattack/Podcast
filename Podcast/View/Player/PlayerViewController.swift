@@ -36,6 +36,8 @@ class PlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.largeTitleDisplayMode = .never
+        
         let view: UIView
         view = setLayout()
         self.view = view
@@ -94,13 +96,22 @@ class PlayerViewController: UIViewController {
     }
     */
     private func setLayout() -> UIView {
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .medium)
         
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         let imageContainerView = UIView()
         view.addSubview(imageContainerView)
-        let rightBarButtonItem = UIBarButtonItem()
-        rightBarButtonItem.image = UIImage(systemName: "square.and.arrow.up")
+        imageContainerView.snp.makeConstraints { make in
+            make.height.equalTo(400)
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+        }
+        
+        let rightBarButtonItemShare = UIBarButtonItem()
+        rightBarButtonItemShare.image = UIImage(systemName: "square.and.arrow.up")
+        let rightBarButtonItemComment = UIBarButtonItem()
+        rightBarButtonItemComment.image = UIImage(systemName: "ellipsis.bubble")
         
         // Set episodeImageView
         episodeImageView = UIImageView()
@@ -109,15 +120,20 @@ class PlayerViewController: UIViewController {
         imageContainerView.addSubview(episodeImageView)
         episodeImageView.snp.makeConstraints { (make) in
             make.centerX.centerY.equalToSuperview()
-            make.height.equalToSuperview()
-            make.height.equalTo(200)
+            make.height.equalTo(300)
             make.width.equalTo(episodeImageView.snp.height)
         }
+        episodeImageView.transform = .identity.scaledBy(x: 0.9, y: 0.9)
         episodeImageView.contentMode = .scaleAspectFit
         episodeImageView.kf.setImage(with: URL(string: episode.imageUrl!))
         
         // Set playbackSlider
         playbackSlider = UISlider()
+        view.addSubview(playbackSlider)
+        playbackSlider.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(imageContainerView.snp.bottom)
+        }
         playbackSlider.addAction(UIAction(handler: { (action) in
             if let sender = action.sender as? UISlider, let podcastPlayer = self.podcastPlayer {
                 let sliderValue = sender.value
@@ -127,35 +143,60 @@ class PlayerViewController: UIViewController {
             
         }), for: .valueChanged)
         
+        playbackSlider.addAction(UIAction(handler: { (action) in
+            if let sender = action.sender as? UISlider, let podcastPlayer = self.podcastPlayer {
+                let sliderValue = sender.value
+                let targetTime = CMTimeMake(value: Int64(sliderValue), timescale: 1)
+                podcastPlayer.seek(to: targetTime)
+                podcastPlayer.pause()
+                self.playButton.setImage(UIImage(systemName: "play")?.withConfiguration(largeConfig), for: .normal)
+                UIView.animate(withDuration: 0.3) {
+                    self.episodeImageView.transform = .identity.scaledBy(x: 0.9, y: 0.9)
+                }
+            }
+            
+        }), for: .valueChanged)
+        
         // Set overall time label
         overallTimeLabel = UILabel()
+        overallTimeLabel.text = String(format: "%02d:%02d:%02d", 0, 0, 0)
         overallTimeLabel.font = .monospacedDigitSystemFont(ofSize: 17, weight: .regular)  //字符等宽，便于显示动态的时间
+        view.addSubview(overallTimeLabel)
+        overallTimeLabel.snp.makeConstraints { make in
+            make.top.equalTo(playbackSlider.snp.bottom).offset(4)
+            make.trailing.equalToSuperview().inset(16)
+        }
         
         // Set current time label
         currentTimeLabel = UILabel()
+        currentTimeLabel.text = String(format: "%02d:%02d:%02d", 0, 0, 0)
         currentTimeLabel.font = .monospacedDigitSystemFont(ofSize: 17, weight: .regular)
-        
-        // Set slider stack
-        let sliderStackView = UIStackView()
-        sliderStackView.axis = .horizontal
-        sliderStackView.alignment = .center
-        sliderStackView.distribution = .fill
-        sliderStackView.spacing = 8
-        sliderStackView.addArrangedSubview(currentTimeLabel)
-        sliderStackView.addArrangedSubview(playbackSlider)
-        sliderStackView.addArrangedSubview(overallTimeLabel)
+        view.addSubview(currentTimeLabel)
+        currentTimeLabel.snp.makeConstraints { make in
+            make.top.equalTo(playbackSlider.snp.bottom).offset(4)
+            make.leading.equalToSuperview().inset(16)
+        }
         
         // Set play button
         playButton = UIButton(type: UIButton.ButtonType.custom)
-        playButton.setImage(UIImage(systemName: "play"), for: .normal)
+        playButton.snp.makeConstraints { make in
+            make.width.height.equalTo(60)
+        }
+        playButton.setImage(UIImage(systemName: "play")?.withConfiguration(largeConfig), for: .normal)
         playButton.addAction(UIAction(handler: { (action) in
             if let podcastPlayer = self.podcastPlayer {
                 if podcastPlayer.rate == 0 {
                     podcastPlayer.play()
-                    self.playButton.setImage(UIImage(systemName: "pause"), for: .normal)
+                    self.playButton.setImage(UIImage(systemName: "pause")?.withConfiguration(largeConfig), for: .normal)
+                    UIView.animate(withDuration: 0.3) {
+                        self.episodeImageView.transform = .identity.scaledBy(x: 1.0, y: 1.0)
+                    }
                 } else {
                     podcastPlayer.pause()
-                    self.playButton.setImage(UIImage(systemName: "play"), for: .normal)
+                    self.playButton.setImage(UIImage(systemName: "play")?.withConfiguration(largeConfig), for: .normal)
+                    UIView.animate(withDuration: 0.3) {
+                        self.episodeImageView.transform = .identity.scaledBy(x: 0.9, y: 0.9)
+                    }
                 }
             }
             
@@ -163,7 +204,10 @@ class PlayerViewController: UIViewController {
         
         // Set forward button
         forwardButton = UIButton()
-        forwardButton.setImage(UIImage(systemName: "forward"), for: .normal)
+        forwardButton.snp.makeConstraints { make in
+            make.width.height.equalTo(60)
+        }
+        forwardButton.setImage(UIImage(systemName: "forward")?.withConfiguration(largeConfig), for: .normal)
         forwardButton.addAction(UIAction(handler: { (action) in
             if let podcastPlayer = self.podcastPlayer, let duration = podcastPlayer.currentItem?.duration {
                 let currentTime = CMTimeGetSeconds(podcastPlayer.currentTime())
@@ -178,7 +222,10 @@ class PlayerViewController: UIViewController {
         
         // Set backward button
         backwardButton = UIButton()
-        backwardButton.setImage(UIImage(systemName: "backward"), for: .normal)
+        backwardButton.snp.makeConstraints { make in
+            make.width.height.equalTo(60)
+        }
+        backwardButton.setImage(UIImage(systemName: "backward")?.withConfiguration(largeConfig), for: .normal)
         backwardButton.addAction(UIAction(handler: { (action) in
             if let podcastPlayer = self.podcastPlayer {
                 let currentTime = CMTimeGetSeconds(podcastPlayer.currentTime())
@@ -199,23 +246,16 @@ class PlayerViewController: UIViewController {
         controlStackView.addArrangedSubview(backwardButton)
         controlStackView.addArrangedSubview(playButton)
         controlStackView.addArrangedSubview(forwardButton)
-        
-        // Set outer stack view
-        let outerStackView = UIStackView()
-        outerStackView.alignment = .fill
-        outerStackView.axis = .vertical
-        outerStackView.distribution = .fill
-        outerStackView.addArrangedSubview(episodeImageView)
-        outerStackView.addArrangedSubview(sliderStackView)
-        outerStackView.addArrangedSubview(controlStackView)
-        outerStackView.spacing = 16
-        view.addSubview(outerStackView)
-        outerStackView.snp.makeConstraints{ (make) in
-            make.centerX.centerY.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(16)
+        view.addSubview(controlStackView)
+        controlStackView.snp.makeConstraints { make in
+            make.width.equalTo(250)
+            make.top.equalTo(overallTimeLabel.snp.bottom).offset(16)
+            make.centerX.equalToSuperview()
         }
+        
+        
 
-        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+        self.navigationItem.rightBarButtonItems = [rightBarButtonItemShare, rightBarButtonItemComment]
         
         return view
     }
