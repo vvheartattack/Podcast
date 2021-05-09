@@ -111,6 +111,9 @@ class PlayerViewController: UIViewController {
         
         let rightBarButtonItemShare = UIBarButtonItem()
         rightBarButtonItemShare.image = UIImage(systemName: "square.and.arrow.up")
+        rightBarButtonItemShare.action = #selector(shareEpisode)
+        rightBarButtonItemShare.target = self
+        
         let rightBarButtonItemComment = UIBarButtonItem()
         rightBarButtonItemComment.image = UIImage(systemName: "ellipsis.bubble")
         rightBarButtonItemComment.action = #selector(showCommentView)
@@ -304,5 +307,14 @@ class PlayerViewController: UIViewController {
 
     @objc func showCommentView() {
         self.present(UIStoryboard(name: "CommentView", bundle: nil).instantiateInitialViewController()!, animated: true, completion: nil)
+    }
+    
+    @objc func shareEpisode() {
+        let episodeStreamItem = URL(string: episode.streamUrl)!
+        
+        let activityViewController : UIActivityViewController = UIActivityViewController(
+            activityItems: [episodeStreamItem], applicationActivities: nil)
+        activityViewController.isModalInPresentation = true
+        self.present(activityViewController, animated: true, completion: nil)
     }
 }
