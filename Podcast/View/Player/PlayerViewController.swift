@@ -41,7 +41,6 @@ class PlayerViewController: UIViewController {
         let view: UIView
         view = setLayout()
         self.view = view
-        self.present(UIStoryboard(name: "CommentView", bundle: nil).instantiateInitialViewController()!, animated: true, completion: nil)
         
         DispatchQueue.main.async {
             let url = URL(string: self.episode.streamUrl)
@@ -98,13 +97,14 @@ class PlayerViewController: UIViewController {
     */
     private func setLayout() -> UIView {
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .medium)
+        let playButtonConfig = UIImage.SymbolConfiguration(pointSize: 35, weight: .medium)
         
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         let imageContainerView = UIView()
         view.addSubview(imageContainerView)
         imageContainerView.snp.makeConstraints { make in
-            make.height.equalTo(400)
+            make.height.equalTo(320)
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
         }
@@ -113,6 +113,8 @@ class PlayerViewController: UIViewController {
         rightBarButtonItemShare.image = UIImage(systemName: "square.and.arrow.up")
         let rightBarButtonItemComment = UIBarButtonItem()
         rightBarButtonItemComment.image = UIImage(systemName: "ellipsis.bubble")
+        rightBarButtonItemComment.action = #selector(showCommentView)
+        rightBarButtonItemComment.target = self
         
         // Set episodeImageView
         episodeImageView = UIImageView()
@@ -128,12 +130,44 @@ class PlayerViewController: UIViewController {
         episodeImageView.contentMode = .scaleAspectFit
         episodeImageView.kf.setImage(with: URL(string: episode.imageUrl!))
         
+        // Podcast title
+        let podcastNameLabel = UILabel()
+        
+        // Episode title
+        let episodeNameLabel = UILabel()
+        episodeNameLabel.text = episode.title
+        episodeNameLabel.font = .systemFont(ofSize: 20, weight: .bold)
+        episodeNameLabel.textAlignment = .center
+        episodeNameLabel.numberOfLines = 0
+        view.addSubview(episodeNameLabel)
+        episodeNameLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(imageContainerView.snp.bottom)
+            make.leading.trailing.equalToSuperview().inset(16)
+        }
+        
+        // Episode subtitle label
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let episodeSubtitleLabel = UILabel()
+        view.addSubview(episodeSubtitleLabel)
+        episodeSubtitleLabel.text = episode.author + "\(episode.author == "" ? "" : " · ")" + dateFormatter.string(from: episode.pubDate)
+        episodeSubtitleLabel.font = .systemFont(ofSize: 17, weight: .medium)
+        episodeSubtitleLabel.textColor = #colorLiteral(red: 0.6999999881, green: 0.6999999881, blue: 0.6999999881, alpha: 1)
+        episodeSubtitleLabel.textAlignment = .center
+        episodeSubtitleLabel.numberOfLines = 0
+        episodeSubtitleLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(episodeNameLabel.snp.bottom)
+            make.leading.trailing.equalToSuperview().inset(16)
+        }
+        
         // Set playbackSlider
         playbackSlider = UISlider()
         view.addSubview(playbackSlider)
         playbackSlider.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(imageContainerView.snp.bottom)
+            make.top.equalTo(episodeSubtitleLabel.snp.bottom).offset(16)
         }
         playbackSlider.addAction(UIAction(handler: { (action) in
             if let sender = action.sender as? UISlider, let podcastPlayer = self.podcastPlayer {
@@ -150,7 +184,7 @@ class PlayerViewController: UIViewController {
                 let targetTime = CMTimeMake(value: Int64(sliderValue), timescale: 1)
                 podcastPlayer.seek(to: targetTime)
                 podcastPlayer.pause()
-                self.playButton.setImage(UIImage(systemName: "play")?.withConfiguration(largeConfig), for: .normal)
+                self.playButton.setImage(UIImage(systemName: "play")?.withConfiguration(playButtonConfig), for: .normal)
                 UIView.animate(withDuration: 0.3) {
                     self.episodeImageView.transform = .identity.scaledBy(x: 0.9, y: 0.9)
                 }
@@ -183,18 +217,18 @@ class PlayerViewController: UIViewController {
         playButton.snp.makeConstraints { make in
             make.width.height.equalTo(60)
         }
-        playButton.setImage(UIImage(systemName: "play")?.withConfiguration(largeConfig), for: .normal)
+        playButton.setImage(UIImage(systemName: "play")?.withConfiguration(playButtonConfig), for: .normal)
         playButton.addAction(UIAction(handler: { (action) in
             if let podcastPlayer = self.podcastPlayer {
                 if podcastPlayer.rate == 0 {
                     podcastPlayer.play()
-                    self.playButton.setImage(UIImage(systemName: "pause")?.withConfiguration(largeConfig), for: .normal)
+                    self.playButton.setImage(UIImage(systemName: "pause")?.withConfiguration(playButtonConfig), for: .normal)
                     UIView.animate(withDuration: 0.3) {
                         self.episodeImageView.transform = .identity.scaledBy(x: 1.0, y: 1.0)
                     }
                 } else {
                     podcastPlayer.pause()
-                    self.playButton.setImage(UIImage(systemName: "play")?.withConfiguration(largeConfig), for: .normal)
+                    self.playButton.setImage(UIImage(systemName: "play")?.withConfiguration(playButtonConfig), for: .normal)
                     UIView.animate(withDuration: 0.3) {
                         self.episodeImageView.transform = .identity.scaledBy(x: 0.9, y: 0.9)
                     }
@@ -240,6 +274,14 @@ class PlayerViewController: UIViewController {
         }), for: .touchUpInside)
         
         // Set control stack view
+        let controlStackViewContainer  = UIView()
+        view.addSubview(controlStackViewContainer)
+        controlStackViewContainer.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(currentTimeLabel.snp.bottom)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+        }
+        
         let controlStackView  = UIStackView()
         controlStackView.alignment = .center
         controlStackView.axis = .horizontal
@@ -247,11 +289,10 @@ class PlayerViewController: UIViewController {
         controlStackView.addArrangedSubview(backwardButton)
         controlStackView.addArrangedSubview(playButton)
         controlStackView.addArrangedSubview(forwardButton)
-        view.addSubview(controlStackView)
+        controlStackViewContainer.addSubview(controlStackView)
         controlStackView.snp.makeConstraints { make in
             make.width.equalTo(250)
-            make.top.equalTo(overallTimeLabel.snp.bottom).offset(16)
-            make.centerX.equalToSuperview()
+            make.centerX.centerY.equalToSuperview()
         }
         
         
@@ -261,4 +302,7 @@ class PlayerViewController: UIViewController {
         return view
     }
 
+    @objc func showCommentView() {
+        self.present(UIStoryboard(name: "CommentView", bundle: nil).instantiateInitialViewController()!, animated: true, completion: nil)
+    }
 }
