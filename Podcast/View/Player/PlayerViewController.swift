@@ -41,6 +41,7 @@ class PlayerViewController: UIViewController {
         let view: UIView
         view = setLayout()
         self.view = view
+        self.present(UIStoryboard(name: "CommentView", bundle: nil).instantiateInitialViewController()!, animated: true, completion: nil)
         
         DispatchQueue.main.async {
             let url = URL(string: self.episode.streamUrl)
