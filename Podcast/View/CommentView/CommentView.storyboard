@@ -294,9 +294,29 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nW0-pz-l7J">
+                                        <rect key="frame" x="0.0" y="796" width="414" height="100"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="说点什么吧" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BL8-zb-CY0">
+                                                <rect key="frame" x="24" y="12" width="366" height="42"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="JqH-jM-3DP"/>
+                                            <constraint firstItem="BL8-zb-CY0" firstAttribute="top" secondItem="nW0-pz-l7J" secondAttribute="top" constant="12" id="O4j-LF-krB"/>
+                                            <constraint firstItem="BL8-zb-CY0" firstAttribute="leading" secondItem="nW0-pz-l7J" secondAttribute="leading" constant="24" id="VCZ-UZ-aZQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="BL8-zb-CY0" secondAttribute="trailing" constant="24" id="XDg-bf-iIN"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="nW0-pz-l7J" firstAttribute="leading" secondItem="XYm-lq-UNV" secondAttribute="leading" id="BCs-Uc-FsQ"/>
+                                    <constraint firstItem="nW0-pz-l7J" firstAttribute="bottom" secondItem="XYm-lq-UNV" secondAttribute="bottom" id="GsE-Yw-Qoc"/>
                                     <constraint firstAttribute="trailing" secondItem="u2Q-aL-S1U" secondAttribute="trailing" constant="16" id="LB8-U7-mMN"/>
+                                    <constraint firstItem="nW0-pz-l7J" firstAttribute="trailing" secondItem="XYm-lq-UNV" secondAttribute="trailing" id="MYM-4s-FeK"/>
                                     <constraint firstItem="u2Q-aL-S1U" firstAttribute="leading" secondItem="t1y-Ce-YIq" secondAttribute="leading" constant="16" id="NH3-RN-5qw"/>
                                     <constraint firstAttribute="bottom" secondItem="u2Q-aL-S1U" secondAttribute="bottom" constant="16" id="YsH-3i-sWA"/>
                                     <constraint firstItem="u2Q-aL-S1U" firstAttribute="width" secondItem="t1y-Ce-YIq" secondAttribute="width" constant="-32" id="cKR-Ff-27X"/>
@@ -309,6 +329,7 @@
                         <viewLayoutGuide key="safeArea" id="gL4-Iy-tVL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="gL4-Iy-tVL" firstAttribute="bottom" secondItem="BL8-zb-CY0" secondAttribute="bottom" constant="12" id="3JO-nA-Zx8"/>
                             <constraint firstItem="t1y-Ce-YIq" firstAttribute="leading" secondItem="dq2-eO-mX0" secondAttribute="leading" id="TMR-LE-8ml"/>
                             <constraint firstAttribute="trailing" secondItem="t1y-Ce-YIq" secondAttribute="trailing" id="ThZ-V2-3m1"/>
                             <constraint firstAttribute="bottom" secondItem="t1y-Ce-YIq" secondAttribute="bottom" id="XCB-Oo-eH0"/>
@@ -319,7 +340,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xoH-Oc-mOS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1129" y="110"/>
+            <point key="canvasLocation" x="1128.985507246377" y="109.82142857142857"/>
         </scene>
     </scenes>
     <resources>
