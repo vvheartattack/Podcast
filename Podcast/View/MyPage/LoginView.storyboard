@@ -8,11 +8,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="Ydn-iX-E73">
             <objects>
-                <viewController id="A4f-yH-3w2" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="XUG-rT-Vsj">
+                <viewController id="A4f-yH-3w2" userLabel="Login View Controller" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XUG-rT-Vsj" userLabel="LoginView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
