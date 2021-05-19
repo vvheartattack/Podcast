@@ -146,8 +146,6 @@ class HomeViewController: UIViewController {
     }
     
     @objc func imageViewTapped(sender: UITapGestureRecognizer) {
-        let myPageViewController = MyPageViewController()
-//        myPageViewController.isModalInPresentation = true
         self.present(UIStoryboard(name: "LoginView", bundle: nil).instantiateInitialViewController()!, animated: true, completion: nil)
     }
     
