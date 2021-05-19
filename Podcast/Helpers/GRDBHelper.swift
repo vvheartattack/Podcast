@@ -73,6 +73,22 @@ class GRDBHelper {
         }
     }
     
+    func createLoginResultTable() {
+        do {
+            try dbQueue.write { db in
+                try db.execute(sql: """
+                    CREATE TABLE IF NOT EXISTS login_result (
+                        user_id TEXT PRIMARY KEY NOT NULL,
+                        password TEXT NOT NULL,
+                        nickname TEXT
+                        )
+                    """)
+            }
+        } catch {
+            fatalError("\(error)")
+        }
+    }
+    
 
     
     func createDownloadedEpisodeTable() {

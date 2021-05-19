@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         GRDBHelper.shared.createSubscribedPodcastTable()
         GRDBHelper.shared.createSubscribedPodcastEpisodesTable()
+        GRDBHelper.shared.createLoginResultTable()
         return true
     }
 

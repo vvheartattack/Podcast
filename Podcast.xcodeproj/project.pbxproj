@@ -34,6 +34,7 @@
 		093942CE264BC7E200A9FD66 /* LoginView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 093942CD264BC7E200A9FD66 /* LoginView.storyboard */; };
 		093942D22654D3F100A9FD66 /* ResultEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093942D12654D3F100A9FD66 /* ResultEntity.swift */; };
 		093942D52654FED500A9FD66 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093942D42654FED500A9FD66 /* User.swift */; };
+		093942D82655514B00A9FD66 /* GlobalCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093942D72655514B00A9FD66 /* GlobalCache.swift */; };
 		0948E0D126106B6C00BAC00E /* SearchViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0948E0D026106B6B00BAC00E /* SearchViewTableViewCell.swift */; };
 		09E0E8F1262733890032E806 /* GRDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E0E8F0262733890032E806 /* GRDBHelper.swift */; };
 		09E0E912262F283C0032E806 /* SubcribedPodcasts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09E0E911262F283C0032E806 /* SubcribedPodcasts.storyboard */; };
@@ -71,6 +72,7 @@
 		093942CD264BC7E200A9FD66 /* LoginView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginView.storyboard; sourceTree = "<group>"; };
 		093942D12654D3F100A9FD66 /* ResultEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultEntity.swift; sourceTree = "<group>"; };
 		093942D42654FED500A9FD66 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		093942D72655514B00A9FD66 /* GlobalCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalCache.swift; sourceTree = "<group>"; };
 		0948E0D026106B6B00BAC00E /* SearchViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewTableViewCell.swift; sourceTree = "<group>"; };
 		09E0E8F0262733890032E806 /* GRDBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRDBHelper.swift; sourceTree = "<group>"; };
 		09E0E911262F283C0032E806 /* SubcribedPodcasts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SubcribedPodcasts.storyboard; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				09E0E8F0262733890032E806 /* GRDBHelper.swift */,
 				093942BF26405A9800A9FD66 /* SubscribeHelper.swift */,
 				093942D12654D3F100A9FD66 /* ResultEntity.swift */,
+				093942D72655514B00A9FD66 /* GlobalCache.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				093942AD263FF3FC00A9FD66 /* SearchViewController.swift in Sources */,
 				0948E0D126106B6C00BAC00E /* SearchViewTableViewCell.swift in Sources */,
 				093530BA25FF444900DAE739 /* NetworkManager.swift in Sources */,
+				093942D82655514B00A9FD66 /* GlobalCache.swift in Sources */,
 				093942D22654D3F100A9FD66 /* ResultEntity.swift in Sources */,
 				09E0E8F1262733890032E806 /* GRDBHelper.swift in Sources */,
 				09E0E916262FDDC60032E806 /* SubscribedPodcastsViewController.swift in Sources */,
