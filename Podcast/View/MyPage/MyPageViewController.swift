@@ -24,6 +24,8 @@ class MyPageViewController: UIViewController {
             if self.loginResult!.data == true {
                 print("login succeeded")
                 self.loginStatus = true
+                GlobalCache.shared.loginResult = User(name: self.userID!, password: self.password!)
+                GlobalCache.shared.saveUserLoginResult()
                 self.dismiss(animated: true, completion: nil)
             } else {
                 print("login failed")

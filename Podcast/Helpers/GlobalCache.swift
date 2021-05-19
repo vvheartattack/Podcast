@@ -32,4 +32,8 @@ class GlobalCache {
         
     }
     
+    func fetchUserLoginResult(_ type: User.Type) {
+        GlobalCache.shared.loginResult =  GRDBHelper.shared.fetchAll(User.self)?.first
+    }
+    
 }

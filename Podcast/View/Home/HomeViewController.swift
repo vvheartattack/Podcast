@@ -146,7 +146,17 @@ class HomeViewController: UIViewController {
     }
     
     @objc func imageViewTapped(sender: UITapGestureRecognizer) {
-        self.present(UIStoryboard(name: "LoginView", bundle: nil).instantiateInitialViewController()!, animated: true, completion: nil)
+        if GlobalCache.shared.loginResult == nil {
+            self.present(UIStoryboard(name: "LoginView", bundle: nil).instantiateInitialViewController()!, animated: true, completion: nil)
+        } else {
+            let alertView = UIAlertController.init(title: "提示", message: "您已登录，无需再次登录。", preferredStyle: .alert)
+
+            let alert = UIAlertAction.init(title: "确定", style: .destructive){(UIAlertAction) in
+                print("确定按钮点击")
+            }
+            alertView.addAction(alert);
+            self.present(alertView, animated: true, completion: nil)
+        }
     }
     
     private func configureCollectionView() {

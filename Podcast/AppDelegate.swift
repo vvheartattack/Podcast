@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GRDBHelper.shared.createSubscribedPodcastTable()
         GRDBHelper.shared.createSubscribedPodcastEpisodesTable()
         GRDBHelper.shared.createLoginResultTable()
+        GlobalCache.shared.fetchUserLoginResult(User.self)
         return true
     }
 
