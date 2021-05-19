@@ -30,8 +30,10 @@
 		093942BB2640205100A9FD66 /* SearchView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 093942BA2640205100A9FD66 /* SearchView.storyboard */; };
 		093942C026405A9800A9FD66 /* SubscribeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093942BF26405A9800A9FD66 /* SubscribeHelper.swift */; };
 		093942C32640600E00A9FD66 /* RecentlyUpdateEpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093942C22640600E00A9FD66 /* RecentlyUpdateEpisodeCell.swift */; };
-		093942C62640708600A9FD66 /* LoginView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 093942C52640708600A9FD66 /* LoginView.storyboard */; };
 		093942CA2647C46B00A9FD66 /* CommentView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 093942C92647C46B00A9FD66 /* CommentView.storyboard */; };
+		093942CE264BC7E200A9FD66 /* LoginView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 093942CD264BC7E200A9FD66 /* LoginView.storyboard */; };
+		093942D22654D3F100A9FD66 /* ResultEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093942D12654D3F100A9FD66 /* ResultEntity.swift */; };
+		093942D52654FED500A9FD66 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093942D42654FED500A9FD66 /* User.swift */; };
 		0948E0D126106B6C00BAC00E /* SearchViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0948E0D026106B6B00BAC00E /* SearchViewTableViewCell.swift */; };
 		09E0E8F1262733890032E806 /* GRDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E0E8F0262733890032E806 /* GRDBHelper.swift */; };
 		09E0E912262F283C0032E806 /* SubcribedPodcasts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09E0E911262F283C0032E806 /* SubcribedPodcasts.storyboard */; };
@@ -65,8 +67,10 @@
 		093942BA2640205100A9FD66 /* SearchView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchView.storyboard; sourceTree = "<group>"; };
 		093942BF26405A9800A9FD66 /* SubscribeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeHelper.swift; sourceTree = "<group>"; };
 		093942C22640600E00A9FD66 /* RecentlyUpdateEpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyUpdateEpisodeCell.swift; sourceTree = "<group>"; };
-		093942C52640708600A9FD66 /* LoginView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginView.storyboard; sourceTree = "<group>"; };
 		093942C92647C46B00A9FD66 /* CommentView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CommentView.storyboard; sourceTree = "<group>"; };
+		093942CD264BC7E200A9FD66 /* LoginView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginView.storyboard; sourceTree = "<group>"; };
+		093942D12654D3F100A9FD66 /* ResultEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultEntity.swift; sourceTree = "<group>"; };
+		093942D42654FED500A9FD66 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0948E0D026106B6B00BAC00E /* SearchViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewTableViewCell.swift; sourceTree = "<group>"; };
 		09E0E8F0262733890032E806 /* GRDBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRDBHelper.swift; sourceTree = "<group>"; };
 		09E0E911262F283C0032E806 /* SubcribedPodcasts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SubcribedPodcasts.storyboard; sourceTree = "<group>"; };
@@ -144,6 +148,7 @@
 			children = (
 				093530C325FF4CE400DAE739 /* Episode.swift */,
 				093530C725FF4CF200DAE739 /* Podcast.swift */,
+				093942D42654FED500A9FD66 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -180,7 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				093530FC260646FF00DAE739 /* MyPageViewController.swift */,
-				093942C52640708600A9FD66 /* LoginView.storyboard */,
+				093942CD264BC7E200A9FD66 /* LoginView.storyboard */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -199,6 +204,7 @@
 				0935310D26087C5000DAE739 /* RSSFeed.swift */,
 				09E0E8F0262733890032E806 /* GRDBHelper.swift */,
 				093942BF26405A9800A9FD66 /* SubscribeHelper.swift */,
+				093942D12654D3F100A9FD66 /* ResultEntity.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -313,8 +319,8 @@
 				0935307D25E7482300DAE739 /* Assets.xcassets in Resources */,
 				093942CA2647C46B00A9FD66 /* CommentView.storyboard in Resources */,
 				0935307B25E7482200DAE739 /* Main.storyboard in Resources */,
+				093942CE264BC7E200A9FD66 /* LoginView.storyboard in Resources */,
 				093530F32606426400DAE739 /* Home.storyboard in Resources */,
-				093942C62640708600A9FD66 /* LoginView.storyboard in Resources */,
 				09E0E912262F283C0032E806 /* SubcribedPodcasts.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,11 +378,13 @@
 				093942AD263FF3FC00A9FD66 /* SearchViewController.swift in Sources */,
 				0948E0D126106B6C00BAC00E /* SearchViewTableViewCell.swift in Sources */,
 				093530BA25FF444900DAE739 /* NetworkManager.swift in Sources */,
+				093942D22654D3F100A9FD66 /* ResultEntity.swift in Sources */,
 				09E0E8F1262733890032E806 /* GRDBHelper.swift in Sources */,
 				09E0E916262FDDC60032E806 /* SubscribedPodcastsViewController.swift in Sources */,
 				0935310926070E1F00DAE739 /* PodcastDetailViewController.swift in Sources */,
 				0935307825E7482200DAE739 /* ViewController.swift in Sources */,
 				093530FD260646FF00DAE739 /* MyPageViewController.swift in Sources */,
+				093942D52654FED500A9FD66 /* User.swift in Sources */,
 				093942B0263FF46000A9FD66 /* RecentlySubscribedPodcastCell.swift in Sources */,
 				093942B3263FF47D00A9FD66 /* RecommendationPodcastCell.swift in Sources */,
 				093942B6263FF49E00A9FD66 /* HomeSectionHeaderView.swift in Sources */,

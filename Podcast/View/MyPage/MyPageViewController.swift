@@ -9,61 +9,39 @@ import UIKit
 import SnapKit
 
 class MyPageViewController: UIViewController {
-
+    var loginResult: ResultEntity<Bool>?
+    var userID: String?
+    var password: String?
+    @IBOutlet weak var userIDTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    
+    @IBAction func loginBtn(_ sender: UIButton) {
+        userID = userIDTextField.text
+        password = passwordTextField.text
+        NetworkManager.shared.login(withUserID: userID!, andPassword: password!, completionHandler: { result in
+            self.loginResult = result
+            if self.loginResult!.data == true {
+                print("login succeeded")
+            } else {
+                print("login failed")
+            }
+        })
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        
+        
 //        setMyPageLayout()
         
         // Do any additional setup after loading the view.
     }
-    
-    private func setMyPageLayout() {
-        let avatarImageView: UIImageView
-        let avatarLabel: UILabel
-        
-        //Set avatarLabel
-        avatarLabel = UILabel()
-        avatarLabel.text = "Mika"
-        avatarLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
-        avatarLabel.textColor = .black
-        
-        // Set avatarImageView
-        avatarImageView = UIImageView()
-        avatarImageView.image = UIImage.init(imageLiteralResourceName: "Avatar.JPG")
-        avatarImageView.clipsToBounds = true
-        avatarImageView.layer.cornerRadius = 75
-        avatarImageView.snp.makeConstraints { (make) in
-            make.width.height.equalTo(150)
-        }
-        avatarImageView.contentMode = .scaleAspectFit
-        
-        let outerStackView: UIStackView
-        let avatarStackView: UIStackView
-        
-        // Set avatarStackView
-        avatarStackView = UIStackView()
-        avatarStackView.distribution = .fill
-        avatarStackView.alignment = .center
-        avatarStackView.axis = .vertical
-        avatarStackView.addArrangedSubview(avatarImageView)
-        avatarStackView.addArrangedSubview(avatarLabel)
-        avatarStackView.spacing = 8
-        
-        // Set outerStackView
-        outerStackView = UIStackView()
-        outerStackView.distribution = .fill
-        outerStackView.axis = .vertical
-        outerStackView.alignment = .center
-        self.view.addSubview(outerStackView)
-        outerStackView.snp.makeConstraints { (make) in
-            make.centerX.equalTo(self.view)
-            make.centerY.equalTo(self.view)
-            make.leading.equalTo(self.view)
-            make.trailing.equalTo(self.view)
-        }
-        outerStackView.addArrangedSubview(avatarStackView)
-        
+    init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
 }

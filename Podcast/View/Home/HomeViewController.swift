@@ -124,6 +124,12 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.imageViewTapped))
+        self.imageView.addGestureRecognizer(tapGesture)
+        self.imageView.isUserInteractionEnabled = true
+        
 
         configureCollectionView()
         configureDataSource()
@@ -137,6 +143,12 @@ class HomeViewController: UIViewController {
         
         SubscribeHelper.updateSubscribedPodcastEpisodes()
 
+    }
+    
+    @objc func imageViewTapped(sender: UITapGestureRecognizer) {
+        let myPageViewController = MyPageViewController()
+//        myPageViewController.isModalInPresentation = true
+        self.present(UIStoryboard(name: "LoginView", bundle: nil).instantiateInitialViewController()!, animated: true, completion: nil)
     }
     
     private func configureCollectionView() {

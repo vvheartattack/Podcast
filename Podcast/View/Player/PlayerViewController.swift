@@ -129,7 +129,7 @@ class PlayerViewController: UIViewController {
             make.height.equalTo(300)
             make.width.equalTo(episodeImageView.snp.height)
         }
-        episodeImageView.transform = .identity.scaledBy(x: 0.9, y: 0.9)
+        episodeImageView.transform = CGAffineTransform.identity.scaledBy(x: 0.9, y: 0.9)
         episodeImageView.contentMode = .scaleAspectFit
         episodeImageView.kf.setImage(with: URL(string: episode.imageUrl!))
         
@@ -189,7 +189,7 @@ class PlayerViewController: UIViewController {
                 podcastPlayer.pause()
                 self.playButton.setImage(UIImage(systemName: "play")?.withConfiguration(playButtonConfig), for: .normal)
                 UIView.animate(withDuration: 0.3) {
-                    self.episodeImageView.transform = .identity.scaledBy(x: 0.9, y: 0.9)
+                    self.episodeImageView.transform = CGAffineTransform.identity.scaledBy(x: 0.9, y: 0.9)
                 }
             }
             
@@ -227,13 +227,13 @@ class PlayerViewController: UIViewController {
                     podcastPlayer.play()
                     self.playButton.setImage(UIImage(systemName: "pause")?.withConfiguration(playButtonConfig), for: .normal)
                     UIView.animate(withDuration: 0.3) {
-                        self.episodeImageView.transform = .identity.scaledBy(x: 1.0, y: 1.0)
+                        self.episodeImageView.transform = CGAffineTransform.identity.scaledBy(x: 1.0, y: 1.0)
                     }
                 } else {
                     podcastPlayer.pause()
                     self.playButton.setImage(UIImage(systemName: "play")?.withConfiguration(playButtonConfig), for: .normal)
                     UIView.animate(withDuration: 0.3) {
-                        self.episodeImageView.transform = .identity.scaledBy(x: 0.9, y: 0.9)
+                        self.episodeImageView.transform = CGAffineTransform.identity.scaledBy(x: 0.9, y: 0.9)
                     }
                 }
             }

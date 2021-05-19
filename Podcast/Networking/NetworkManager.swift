@@ -50,4 +50,26 @@ class NetworkManager {
                 }
             })
     }
+    
+    func login(withUserID userID: String, andPassword password: String, completionHandler: @escaping (ResultEntity<Bool>) -> ()) -> DataRequest {
+        let parameters = ["name": userID, "password": password]
+        return AF.request("http://127.0.0.1:8080/login", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default)
+            .response { (response) in
+                guard response.error == nil  else {
+                    print("login request failed", response.error!)
+                    return
+                }
+                
+                if let data = response.data {
+                    do {
+                        let result = try JSONDecoder().decode(ResultEntity<Bool>.self, from: data)
+                        completionHandler(result)
+                    } catch let error {
+                        print("Failed to decode. Error: \(error)")
+                    }
+                }
+            }
+        
+        
+    }
 }
