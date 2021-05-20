@@ -338,7 +338,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="评论" id="xiO-5z-zTq"/>
                     <connections>
-                        <outlet property="inputFieldView" destination="BL8-zb-CY0" id="AEk-ih-EWd"/>
+                        <outlet property="inputFieldView" destination="nW0-pz-l7J" id="s06-WF-d9H"/>
+                        <outlet property="inputTextField" destination="BL8-zb-CY0" id="AEk-ih-EWd"/>
                         <outlet property="scrollView" destination="t1y-Ce-YIq" id="uao-4s-Kla"/>
                     </connections>
                 </viewController>
