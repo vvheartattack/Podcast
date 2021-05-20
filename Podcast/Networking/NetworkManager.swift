@@ -68,8 +68,47 @@ class NetworkManager {
                         print("Failed to decode. Error: \(error)")
                     }
                 }
+        }
+    }
+    
+    func fetchComment(withPodcastTrackID podcastTrackID: Int, andEpisodeID episodeID: String, completionHandler: @escaping (ResultEntity<[Comment]>) -> ()) -> DataRequest {
+        let parameters = ["podcastTrackID": podcastTrackID, "episodeID": episodeID] as [String : Any]
+        return AF.request("http://127.0.0.1:8080/comment",method: .get, parameters: parameters)
+            .response { (response) in
+                guard response.error == nil  else {
+                    print("fetch comments failed", response.error!)
+                    return
+                }
+                
+                if let data = response.data {
+                    do {
+                        let results = try JSONDecoder().decode(ResultEntity<[Comment]>.self, from: data)
+                        completionHandler(results)
+                    } catch let error {
+                        print("Failed to decode. Error: \(error)")
+                    }
+                }
             }
-        
+    }
+    
+    func postComment(withPodcastTrackID podcastTrackID: Int, andEpisodeID episodeID: String, andUserName userName: String, andCommentContent commentContent: String, completionHandler: @escaping (ResultEntity<Comment>) -> ()) -> DataRequest {
+        let parameters: [String: Any] = ["podcastTrackID": podcastTrackID, "episodeID": episodeID, "userName": userName, "commentContent": commentContent]
+        return AF.request("http://127.0.0.1:8080/comment", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default)
+            .response { (response) in
+                guard response.error == nil  else {
+                    print("post comment request failed", response.error!)
+                    return
+                }
+                
+                if let data = response.data {
+                    do {
+                        let result = try JSONDecoder().decode(ResultEntity<Comment>.self, from: data)
+                        completionHandler(result)
+                    } catch let error {
+                        print("Failed to decode. Error: \(error)")
+                    }
+                }
+            }
         
     }
 }

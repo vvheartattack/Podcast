@@ -35,6 +35,7 @@
 		093942D22654D3F100A9FD66 /* ResultEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093942D12654D3F100A9FD66 /* ResultEntity.swift */; };
 		093942D52654FED500A9FD66 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093942D42654FED500A9FD66 /* User.swift */; };
 		093942D82655514B00A9FD66 /* GlobalCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093942D72655514B00A9FD66 /* GlobalCache.swift */; };
+		093942DF26567CF300A9FD66 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093942DE26567CF300A9FD66 /* Comment.swift */; };
 		0948E0D126106B6C00BAC00E /* SearchViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0948E0D026106B6B00BAC00E /* SearchViewTableViewCell.swift */; };
 		09E0E8F1262733890032E806 /* GRDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E0E8F0262733890032E806 /* GRDBHelper.swift */; };
 		09E0E912262F283C0032E806 /* SubcribedPodcasts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09E0E911262F283C0032E806 /* SubcribedPodcasts.storyboard */; };
@@ -74,6 +75,7 @@
 		093942D12654D3F100A9FD66 /* ResultEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultEntity.swift; sourceTree = "<group>"; };
 		093942D42654FED500A9FD66 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		093942D72655514B00A9FD66 /* GlobalCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalCache.swift; sourceTree = "<group>"; };
+		093942DE26567CF300A9FD66 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		0948E0D026106B6B00BAC00E /* SearchViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewTableViewCell.swift; sourceTree = "<group>"; };
 		09E0E8F0262733890032E806 /* GRDBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRDBHelper.swift; sourceTree = "<group>"; };
 		09E0E911262F283C0032E806 /* SubcribedPodcasts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SubcribedPodcasts.storyboard; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				093530C325FF4CE400DAE739 /* Episode.swift */,
 				093530C725FF4CF200DAE739 /* Podcast.swift */,
 				093942D42654FED500A9FD66 /* User.swift */,
+				093942DE26567CF300A9FD66 /* Comment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				09E0E916262FDDC60032E806 /* SubscribedPodcastsViewController.swift in Sources */,
 				63638ABA265676C6005005FA /* CommentViewController.swift in Sources */,
 				0935310926070E1F00DAE739 /* PodcastDetailViewController.swift in Sources */,
+				093942DF26567CF300A9FD66 /* Comment.swift in Sources */,
 				0935307825E7482200DAE739 /* ViewController.swift in Sources */,
 				093530FD260646FF00DAE739 /* MyPageViewController.swift in Sources */,
 				093942D52654FED500A9FD66 /* User.swift in Sources */,
