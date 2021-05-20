@@ -27,12 +27,7 @@ class CommentViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShowNotificationHandler), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHideNotificationHandler), name: UIResponder.keyboardWillHideNotification, object: nil)
         NetworkManager.shared.postComment(withPodcastTrackID: podcast!.trackId, andEpisodeID: episode!.guid, andUserName: GlobalCache.shared.loginResult!.name, andCommentContent: inputText, completionHandler: { result in
-            let comment = Comment(userName: GlobalCache.shared.loginResult!.name, commentContent: inputText, podcastTrackID: self.podcast!.trackId, episodeID: self.episode!.guid)
-            if result.data == comment {
-                print("comment post succeeded")
-            } else {
-                print("comment post failed")
-            }
+            print(result)
             
         })
     }

@@ -12,7 +12,7 @@ struct Comment: Decodable, Hashable, Encodable {
     var comment_id: UUID?
     var userName: String
     var commentContent: String
-    var createTime: Date?
+    var createTime: String
     var podcastTrackID: Int
     var episodeID: String
 }
