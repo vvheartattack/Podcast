@@ -8,14 +8,15 @@
 import UIKit
 
 class CommentViewController: UIViewController {
-    @IBOutlet var inputFieldView: UITextField!
+    @IBOutlet var inputTextField: UITextField!
+    @IBOutlet weak var inputFieldView: UIView!
     @IBOutlet var scrollView: UIScrollView!
     var podcast: Podcast?
     var episode: Episode?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let inputText = inputFieldView.text!
+        let inputText = inputTextField.text!
         
         podcast = Podcast(trackId: 1234)
         episode = Episode(guid: "alsdj", title: "", pubDate: Date(), description: "", author: "", streamUrl: "")
