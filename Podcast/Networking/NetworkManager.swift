@@ -93,7 +93,7 @@ class NetworkManager {
     
     func postComment(withPodcastTrackID podcastTrackID: Int, andEpisodeID episodeID: String, andUserName userName: String, andCommentContent commentContent: String, completionHandler: @escaping (ResultEntity<Comment>) -> ()) -> DataRequest {
         let parameters: [String: Any] = ["podcastTrackID": podcastTrackID, "episodeID": episodeID, "userName": userName, "commentContent": commentContent]
-        return AF.request("http://127.0.0.1:8080/comment", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default)
+        return AF.request("http://127.0.0.1:8080/comment", method: .post, parameters: parameters)
             .response { (response) in
                 guard response.error == nil  else {
                     print("post comment request failed", response.error!)
