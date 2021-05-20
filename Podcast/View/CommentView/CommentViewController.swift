@@ -32,7 +32,8 @@ class CommentViewController: UIViewController {
         // Do any additional setup after loading the view.
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShowNotificationHandler), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHideNotificationHandler), name: UIResponder.keyboardWillHideNotification, object: nil)
-        NetworkManager.shared.postComment(withPodcastTrackID: podcast!.trackId, andEpisodeID: episode!.guid, andUserName: "GlobalCache.shared.loginResult!.name", andCommentContent: inputText, completionHandler: { result in
+        
+        NetworkManager.shared.postComment(withPodcastTrackID: podcast!.trackId, andEpisodeID: episode!.guid, andUserName: GlobalCache.shared.loginResult!.name, andCommentContent: inputText, completionHandler: { result in
             print(result)
             
         })
@@ -112,7 +113,7 @@ class CommentViewController: UIViewController {
         innterVStack.addArrangedSubview(contentLabel)
         
         let timeLabel = UILabel()
-        timeLabel.text = comment.commentContent
+        timeLabel.text = comment.createTime
         timeLabel.textColor = .gray
         timeLabel.font = .systemFont(ofSize: 15, weight: .medium)
         timeLabel.textAlignment = .right
