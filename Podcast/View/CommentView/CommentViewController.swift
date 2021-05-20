@@ -26,10 +26,14 @@ class CommentViewController: UIViewController {
         // Do any additional setup after loading the view.
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShowNotificationHandler), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHideNotificationHandler), name: UIResponder.keyboardWillHideNotification, object: nil)
-        NetworkManager.shared.postComment(withPodcastTrackID: podcast!.trackId, andEpisodeID: episode!.guid, andUserName: GlobalCache.shared.loginResult!.name, andCommentContent: inputText, completionHandler: { result in
+        NetworkManager.shared.postComment(withPodcastTrackID: podcast!.trackId, andEpisodeID: episode!.guid, andUserName: "GlobalCache.shared.loginResult!.name", andCommentContent: inputText, completionHandler: { result in
             print(result)
             
         })
+        
+        NetworkManager.shared.fetchComment(withPodcastTrackID: podcast!.trackId, andEpisodeID: episode!.guid) { result in
+            print(result)
+        }
     }
     
     @objc func keyboardWillShowNotificationHandler(notification: NSNotification) {
